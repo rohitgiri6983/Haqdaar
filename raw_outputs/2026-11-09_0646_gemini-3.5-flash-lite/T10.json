@@ -1,0 +1,109 @@
+{
+  "id": "T10",
+  "title": "UPI fraud · urgent",
+  "input": "Yesterday someone called pretending to be from my bank, I shared an OTP and ₹25,000 was taken from my account through UPI. What do I do right now?",
+  "language": "en",
+  "model": "gemini-3.5-flash-lite",
+  "host": "generativelanguage.googleapis.com",
+  "timestamp": "2026-11-09T01:17:20.303Z",
+  "latency_ms": 2429,
+  "raw": "It sounds like you lost ₹25,000 yesterday when someone tricked you into sharing an OTP for a UPI transaction. \n\n**Where you stand**\n- You are a victim of online financial fraud [[RBI-LIAB]].\n- Acting immediately gives you the best chance to freeze the transaction [[RES-CYBER]].\n\n**What you can do**\n1. Call [[RES-CYBER]] right now at 1930 or go to cybercrime.gov.in to report the fraud and block the money.\n2. Call your bank immediately to block your account and report the unauthorised transaction [[RBI-LIAB]].\n\nTo help you further, which bank holds your account, and do you have the transaction ID or SMS proof?\n\n<<<CASE>>>\n{\"no\":\"HQ/2026/3007\",\"category\":\"fraud\",\"title\":\"UPI fraud through shared OTP\",\"summary\":\"The user was tricked by a fake bank call into sharing an OTP, resulting in an unauthorised UPI deduction of 25000 rupees yesterday.\",\"place\":\"\",\"amount\":25000,\"parties\":{\"you\":\"\",\"other\":\"fake bank caller\",\"other_role\":\"bank impersonator\"},\"events\":[{\"date\":\"2026-11-08\",\"when\":\"yesterday\",\"what\":\"fraudulent UPI deduction of 25000 rupees after sharing OTP\"}],\"evidence\":[{\"item\":\"SMS alert\",\"status\":\"have\",\"why\":\"shows transaction details\"}],\"key_dates\":{\"incident_date\":\"2026-11-08\"},\"options\":[{\"name\":\"Cyber Crime Reporting\",\"forum\":\"Cyber Crime Cell\",\"cost\":\"Free\",\"time\":\"Immediate\",\"ids\":[\"RES-CYBER\"]}],\"missing_info\":[\"Which bank holds your account?\",\"Do you have the transaction reference number or SMS?\"],\"escalate\":{\"needed\":false,\"reason\":\"\"},\"confidence\":\"medium\",\"next_step\":\"Call 1930 immediately to report the fraud.\"}",
+  "reply": "It sounds like you lost ₹25,000 yesterday when someone tricked you into sharing an OTP for a UPI transaction. \n\n**Where you stand**\n- You are a victim of online financial fraud [[RBI-LIAB]].\n- Acting immediately gives you the best chance to freeze the transaction [[RES-CYBER]].\n\n**What you can do**\n1. Call [[RES-CYBER]] right now at 1930 or go to cybercrime.gov.in to report the fraud and block the money.\n2. Call your bank immediately to block your account and report the unauthorised transaction [[RBI-LIAB]].\n\nTo help you further, which bank holds your account, and do you have the transaction ID or SMS proof?",
+  "case": {
+    "no": "HQ/2026/5138",
+    "category": "fraud",
+    "title": "UPI fraud through shared OTP",
+    "summary": "The user was tricked by a fake bank call into sharing an OTP, resulting in an unauthorised UPI deduction of 25000 rupees yesterday.",
+    "place": "",
+    "amount": 25000,
+    "parties": {
+      "you": "",
+      "other": "fake bank caller",
+      "other_role": "bank impersonator"
+    },
+    "events": [
+      {
+        "date": "2026-11-08",
+        "when": "yesterday",
+        "what": "fraudulent UPI deduction of 25000 rupees after sharing OTP"
+      }
+    ],
+    "evidence": [
+      {
+        "item": "SMS alert",
+        "status": "have",
+        "why": "shows transaction details"
+      }
+    ],
+    "key_dates": {
+      "incident_date": "2026-11-08"
+    },
+    "options": [
+      {
+        "name": "Cyber Crime Reporting",
+        "forum": "Cyber Crime Cell",
+        "cost": "Free",
+        "time": "Immediate",
+        "ids": [
+          "RES-CYBER"
+        ]
+      }
+    ],
+    "missing_info": [
+      "Which bank holds your account?",
+      "Do you have the transaction reference number or SMS?"
+    ],
+    "escalate": {
+      "needed": false,
+      "reason": ""
+    },
+    "confidence": "medium",
+    "next_step": "Call 1930 immediately to report the fraud."
+  },
+  "validation": {
+    "verified": [
+      "RBI-LIAB",
+      "RES-CYBER"
+    ],
+    "unknown": [],
+    "flags": [],
+    "clean": true
+  },
+  "lawyer_alert": {
+    "model": false,
+    "reason": "",
+    "rules": [],
+    "needed": false
+  },
+  "deadlines": [
+    {
+      "label": "Report to your bank by (for zero liability)",
+      "date": "2026-11-11",
+      "cite": "RBI-LIAB",
+      "note": "Three working days. Report right now if you have not."
+    }
+  ],
+  "checks": [
+    {
+      "k": "category",
+      "label": "category = fraud (got fraud)",
+      "pass": true
+    },
+    {
+      "k": "mentions",
+      "label": "mentions /1930/",
+      "pass": true
+    },
+    {
+      "k": "citesAny",
+      "label": "cites one of RBI-LIAB, RES-CYBER",
+      "pass": true
+    },
+    {
+      "k": "clean",
+      "label": "no unverified law, case names or citations",
+      "pass": true
+    }
+  ],
+  "passed": true
+}

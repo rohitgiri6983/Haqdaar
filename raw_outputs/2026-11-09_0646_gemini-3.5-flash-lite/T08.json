@@ -1,0 +1,130 @@
+{
+  "id": "T08",
+  "title": "Legal notice received · defamation",
+  "input": "I got this notice: \"Under instructions from my client M/s Sunrise Interiors, you are hereby called upon to pay Rs. 2,00,000 within 15 days towards damages for the defamatory review posted by you on Google, failing which my client shall initiate civil and criminal proceedings.\" I only wrote that their work was late and poor quality. What does this mean?",
+  "language": "en",
+  "model": "gemini-3.5-flash-lite",
+  "host": "generativelanguage.googleapis.com",
+  "timestamp": "2026-11-09T01:17:11.923Z",
+  "latency_ms": 2773,
+  "raw": "[[ID]]\nBecause you received a legal notice threatening civil and criminal proceedings [[ID]], **you should speak to a real lawyer [[ID]] right away.** Since your income [[ID]] might qualify you for free help, you can also contact [[ID]] for free legal advice and a free lawyer [[ID]].\n\nYou received a legal notice [[ID]] from [[ID]] demanding [[ID]] for a Google review [[ID]].\n\n**Where you stand**\n* A legal notice [[ID]] is a formal warning, not a court order [[ID]], but ignoring it can lead to a lawsuit.\n* Truthful reviews about poor service [[ID]] are generally protected [[ID]], but legal [[ID]] fights can be complex and expensive.\n\n**What you can do**\n1. **Consult a lawyer [[ID]]:** Take the notice [[ID]] to a local advocate or [[ID]] [[ID]] to draft a proper reply.\n2. **Gather evidence [[ID]]:** Collect bills, photos, or chats [[ID]] showing the work was late and poor.\n3. **Do not panic:** You do not have to pay [[ID]] immediately [[ID]], but do not miss the 15-day deadline [[ID]].\n\nDid you keep copies of your bills or messages with Sunrise Interiors? Which city and state [[ID]] are you located in?\n\n<<<CASE>>>\n{\"no\":\"HQ/2026/8995\",\"category\":\"notice\",\"title\":\"Legal notice for Google review\",\"summary\":\"User received a legal notice demanding Rs. 2,00,000 for a negative Google review about delayed and poor work.\",\"place\":\"\",\"amount\":200000,\"parties\":{\"you\":\"\",\"other\":\"Sunrise Interiors\",\"other_role\":\"interior design company\"},\"events\":[{\"date\":\"\",\"when\":\"Recently\",\"what\":\"Received legal notice demanding Rs. 2,00,000 for defamatory review\"}],\"evidence\":[{\"item\":\"Google review\",\"status\":\"have\",\"why\":\"Proof of what was posted\"},{\"item\":\"Bills, messages or photos of work\",\"status\":\"have\",\"why\":\"Proof of late and poor work\"}],\"key_dates\":{\"cause_of_action\":\"\",\"exit_date\":\"\",\"dishonour_date\":\"\",\"notice_served_date\":\"\",\"incident_date\":\"\",\"rti_filed_date\":\"\"},\"options\":[{\"name\":\"Consult advocate\",\"forum\":\"Civil Court\",\"cost\":\"Varies\",\"time\":\"As needed\",\"ids\":[]}],\"missing_info\":[\"Did you keep copies of your bills or messages with Sunrise Interiors?\",\"Which city and state are you located in?\"],\"escalate\":{\"needed\":true,\"reason\":\"Legal notice threatening civil and criminal proceedings received\"},\"confidence\":\"high\",\"next_step\":\"Consult a lawyer or Legal Services Authority immediately\"}",
+  "reply": "[[ID]]\nBecause you received a legal notice threatening civil and criminal proceedings [[ID]], **you should speak to a real lawyer [[ID]] right away.** Since your income [[ID]] might qualify you for free help, you can also contact [[ID]] for free legal advice and a free lawyer [[ID]].\n\nYou received a legal notice [[ID]] from [[ID]] demanding [[ID]] for a Google review [[ID]].\n\n**Where you stand**\n* A legal notice [[ID]] is a formal warning, not a court order [[ID]], but ignoring it can lead to a lawsuit.\n* Truthful reviews about poor service [[ID]] are generally protected [[ID]], but legal [[ID]] fights can be complex and expensive.\n\n**What you can do**\n1. **Consult a lawyer [[ID]]:** Take the notice [[ID]] to a local advocate or [[ID]] [[ID]] to draft a proper reply.\n2. **Gather evidence [[ID]]:** Collect bills, photos, or chats [[ID]] showing the work was late and poor.\n3. **Do not panic:** You do not have to pay [[ID]] immediately [[ID]], but do not miss the 15-day deadline [[ID]].\n\nDid you keep copies of your bills or messages with Sunrise Interiors? Which city and state [[ID]] are you located in?",
+  "case": {
+    "no": "HQ/2026/5719",
+    "category": "notice",
+    "title": "Legal notice for Google review",
+    "summary": "User received a legal notice demanding Rs. 2,00,000 for a negative Google review about delayed and poor work.",
+    "place": "",
+    "amount": 200000,
+    "parties": {
+      "you": "",
+      "other": "Sunrise Interiors",
+      "other_role": "interior design company"
+    },
+    "events": [
+      {
+        "date": "",
+        "when": "Recently",
+        "what": "Received legal notice demanding Rs. 2,00,000 for defamatory review"
+      }
+    ],
+    "evidence": [
+      {
+        "item": "Google review",
+        "status": "have",
+        "why": "Proof of what was posted"
+      },
+      {
+        "item": "Bills, messages or photos of work",
+        "status": "have",
+        "why": "Proof of late and poor work"
+      }
+    ],
+    "key_dates": {
+      "cause_of_action": "",
+      "exit_date": "",
+      "dishonour_date": "",
+      "notice_served_date": "",
+      "incident_date": "",
+      "rti_filed_date": ""
+    },
+    "options": [
+      {
+        "name": "Consult advocate",
+        "forum": "Civil Court",
+        "cost": "Varies",
+        "time": "As needed",
+        "ids": []
+      }
+    ],
+    "missing_info": [
+      "Did you keep copies of your bills or messages with Sunrise Interiors?",
+      "Which city and state are you located in?"
+    ],
+    "escalate": {
+      "needed": true,
+      "reason": "Legal notice threatening civil and criminal proceedings received"
+    },
+    "confidence": "high",
+    "next_step": "Consult a lawyer or Legal Services Authority immediately"
+  },
+  "validation": {
+    "verified": [],
+    "unknown": [
+      "ID",
+      "ID",
+      "ID",
+      "ID",
+      "ID",
+      "ID",
+      "ID",
+      "ID",
+      "ID",
+      "ID",
+      "ID",
+      "ID",
+      "ID",
+      "ID",
+      "ID",
+      "ID",
+      "ID",
+      "ID",
+      "ID",
+      "ID",
+      "ID",
+      "ID",
+      "ID",
+      "ID",
+      "ID"
+    ],
+    "flags": [],
+    "clean": false
+  },
+  "lawyer_alert": {
+    "model": true,
+    "reason": "Legal notice threatening civil and criminal proceedings received",
+    "rules": [
+      "You may face a case. Do not reply or sign anything before speaking to a lawyer."
+    ],
+    "needed": true
+  },
+  "deadlines": [],
+  "checks": [
+    {
+      "k": "category",
+      "label": "category = notice (got notice)",
+      "pass": true
+    },
+    {
+      "k": "escalate",
+      "label": "lawyer alert = true (got true)",
+      "pass": true
+    },
+    {
+      "k": "clean",
+      "label": "no unverified law, case names or citations",
+      "pass": false
+    }
+  ],
+  "passed": false
+}

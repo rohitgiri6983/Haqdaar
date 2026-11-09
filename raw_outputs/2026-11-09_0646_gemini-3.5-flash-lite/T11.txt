@@ -1,0 +1,15 @@
+I understand you work in Dubai for a company registered there, and they have not paid your salary for three months.
+
+**Where you stand**
+* Since your job and employer are outside India, Indian employment laws generally do not apply to your case.
+* Cases involving employment outside India must be handled under the laws of that country or through diplomatic channels.
+* As this matter happened outside India, you should consult a legal professional [[RES-NALSA]].
+
+**What you can do**
+1. Contact the Ministry of Human Resources and Emiratisation (MOHRE) in Dubai to file an official labour complaint for unpaid wages.
+2. Consult a local lawyer or legal advisor in Dubai who understands UAE labour laws.
+
+Which city or emirate in Dubai are you working in, and does your employment contract mention any specific jurisdiction for disputes?
+
+<<<CASE>>>
+{"no":"HQ/2026/6720","category":"salary","title":"Unpaid salary in Dubai","summary":"An employee working in Dubai for a foreign-registered company has not received salary for three months.","place":"Dubai","amount":null,"parties":{"you":"","other":"Company","other_role":"employer"},"events":[{"date":"","when":"past 3 months","what":"Salary not paid"}],"evidence":[{"item":"Employment contract","status":"have","why":"Proof of employment"}],"key_dates":{},"options":[],"missing_info":["Which city or emirate in Dubai are you working in?","Does your employment contract mention any specific jurisdiction for disputes?"],"escalate":{"needed":true,"reason":"Incident happened outside India"},"confidence":"high","next_step":"File a complaint with UAE labour authorities or consult a UAE lawyer."}

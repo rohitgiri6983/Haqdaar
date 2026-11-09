@@ -1,0 +1,15 @@
+நீங்கள் 5 அக்டோபர் 2026 அன்று மொபைல் போனை பழுது பார்க்கக் கொடுத்து ₹6,500 முன்பணம் செலுத்தியும், ஒரு மாதமாகியும் சர்வீஸ் சென்டர் அதனைத் திருப்பித் தரவில்லை என்பதை நான் புரிந்துகொண்டேன்.
+
+**Where you stand**
+* சர்வீஸ் சென்டரின் இந்தத் தாமதம் சேவை குறைபாடாகக் கருதப்படலாம் [[CPA-2-11]].
+* நீங்கள் செலுத்திய முன்பணத்தைத் திரும்பப் பெற [[ICA-73]] விதிகளின்படி உரிமை உள்ளது.
+
+**What you can do**
+1. சர்வீஸ் சென்டருக்கு எழுத்துப்பூர்வமாக ஒரு கடிதம் அல்லது மின்னஞ்சல் அனுப்பி, உங்கள் போனை உடனடியாகத் திருப்பித் தருமாறு அல்லது முன்பணத்தை வட்டியுடன் வழங்குமாறு கேளுங்கள்.
+2. அவர்கள் பதிலளிக்கவில்லை என்றால், தேசிய நுகர்வோர் உதவி மையத்தை [[RES-NCH]] (1915) தொடர்பு கொண்டு புகார் அளியுங்கள்.
+3. தேவைப்பட்டால், நுகர்வோர் கமிஷன் [[RES-EDAAKHIL]] மூலமாக [[CPA-35]] வழக்குகளை நீங்களே நேரடியாகத் தாக்கல் செய்யலாம்.
+
+இந்தச் சர்வீஸ் சென்டர் எந்த மாநிலத்த/நகரத்தைச் சேர்ந்தது? உங்களிடம் முன்பணம் செலுத்திய ரசீது உள்ளதா?
+
+<<<CASE>>>
+{"no":"HQ/2026/9256","category":"consumer","title":"Mobile repair delay and advance refund dispute","summary":"User gave a mobile phone for repair on 5 October 2026 and paid an advance of ₹6,500, but the service center has not returned it after a month.","place":"","amount":6500,"parties":{"you":"","other":"service center","other_role":"service provider"},"events":[{"date":"2026-10-05","when":"5 October 2026","what":"Gave mobile for repair and paid ₹6,500 advance"}],"evidence":[{"item":"Advance payment receipt","status":"have","why":"Proof of payment to the service center"}],"key_dates":{"cause_of_action":"2026-11-05"},"options":[{"name":"Consumer Helpline Complaint","forum":"National Consumer Helpline","cost":"Free","time":"1-2 weeks","ids":["RES-NCH","CPA-2-11"]},{"name":"Consumer Commission","forum":"District Consumer Commission","cost":"Free up to ₹5 lakh","time":"1-3 months","ids":["CPA-34","CPA-35","CPA-FEE"]}],"missing_info":["சேவை மையம் அமைந்துள்ள நகரம் / மாநிலம் எது?","உங்களிடம் முன்பணம் செலுத்திய ரசீது உள்ளதா?"],"escalate":{"needed":false,"reason":""},"confidence":"medium","next_step":"Send a written demand to the service center and file a complaint with National Consumer Helpline 1915"}

@@ -1,0 +1,117 @@
+{
+  "id": "T12",
+  "title": "Time limit passed · consumer",
+  "input": "In March 2024 I bought a washing machine that stopped working within a week. The shop refused to repair it. Can I go to consumer court now?",
+  "language": "en",
+  "model": "gemini-3.5-flash-lite",
+  "host": "generativelanguage.googleapis.com",
+  "timestamp": "2026-11-09T01:17:27.425Z",
+  "latency_ms": 2232,
+  "raw": "You bought a washing machine for ₹... in March 2024 that stopped working within a week, and the shop refused to repair it [[CPA-2-11], [[CPA-2-47]]. \n\n**Where you stand**\n* Selling a defective product and refusing to repair or replace it is an unfair trade practice [[CPA-2-47]].\n* Consumer complaints must generally be filed within two years from when the problem started [[CPA-69]].\n\n**What you can do**\n1. Call the National Consumer Helpline at [[RES-NCH]] to try for a quick settlement [[RES-NCH]].\n2. File a consumer complaint online through [[RES-EDAAKHIL]] if the helpline does not work [[CPA-35]].\n\nDo you remember the exact date in March 2024 you bought it, and do you have the purchase bill?\n\n<<<CASE>>>\n{\"no\":\"HQ/2026/3317\",\"category\":\"consumer\",\"title\":\"Defective washing machine refused repair\",\"summary\":\"A consumer bought a washing machine in March 2024 that failed within a week, but the shop refused to repair it.\",\"place\":\"\",\"amount\":null,\"parties\":{\"you\":\"\",\"other\":\"shop\",\"other_role\":\"seller\"},\"events\":[{\"date\":\"2024-03-XX\",\"when\":\"March 2024\",\"what\":\"Bought washing machine that stopped working within a week\"},{\"date\":\"\",\"when\":\"within a week of purchase\",\"what\":\"Shop refused to repair\"}],\"evidence\":[{\"item\":\"purchase bill\",\"status\":\"need\",\"why\":\"proof of purchase\"}],\"key_dates\":{\"cause_of_action\":\"2024-03-XX\"},\"options\":[{\"name\":\"Consumer Commission Complaint\",\"forum\":\"District Consumer Commission\",\"cost\":\"Free up to ₹5 lakh\",\"time\":\"3 to 6 months\",\"ids\":[\"CPA-2-7\",\"CPA-2-11\",\"CPA-2-47\",\"CPA-34\",\"CPA-35\",\"CPA-69\",\"CPA-FEE\",\"RES-EDAAKHIL\"]}],\"missing_info\":[\"What is the exact date you bought the washing machine?\",\"Do you have the purchase bill or receipt?\"],\"escalate\":{\"needed\":false,\"reason\":\"\"},\"confidence\":\"medium\",\"next_step\":\"File a complaint on e-Daakhil or approach the National Consumer Helpline\"}",
+  "reply": "You bought a washing machine for ₹... in March 2024 that stopped working within a week, and the shop refused to repair it [[CPA-2-11], [[CPA-2-47]]. \n\n**Where you stand**\n* Selling a defective product and refusing to repair or replace it is an unfair trade practice [[CPA-2-47]].\n* Consumer complaints must generally be filed within two years from when the problem started [[CPA-69]].\n\n**What you can do**\n1. Call the National Consumer Helpline at [[RES-NCH]] to try for a quick settlement [[RES-NCH]].\n2. File a consumer complaint online through [[RES-EDAAKHIL]] if the helpline does not work [[CPA-35]].\n\nDo you remember the exact date in March 2024 you bought it, and do you have the purchase bill?",
+  "case": {
+    "no": "HQ/2026/9923",
+    "category": "consumer",
+    "title": "Defective washing machine refused repair",
+    "summary": "A consumer bought a washing machine in March 2024 that failed within a week, but the shop refused to repair it.",
+    "place": "",
+    "amount": null,
+    "parties": {
+      "you": "",
+      "other": "shop",
+      "other_role": "seller"
+    },
+    "events": [
+      {
+        "date": "",
+        "when": "March 2024",
+        "what": "Bought washing machine that stopped working within a week"
+      },
+      {
+        "date": "",
+        "when": "within a week of purchase",
+        "what": "Shop refused to repair"
+      }
+    ],
+    "evidence": [
+      {
+        "item": "purchase bill",
+        "status": "need",
+        "why": "proof of purchase"
+      }
+    ],
+    "key_dates": {
+      "cause_of_action": "2024-03-XX"
+    },
+    "options": [
+      {
+        "name": "Consumer Commission Complaint",
+        "forum": "District Consumer Commission",
+        "cost": "Free up to ₹5 lakh",
+        "time": "3 to 6 months",
+        "ids": [
+          "CPA-2-7",
+          "CPA-2-11",
+          "CPA-2-47",
+          "CPA-34",
+          "CPA-35",
+          "CPA-69",
+          "CPA-FEE",
+          "RES-EDAAKHIL"
+        ]
+      }
+    ],
+    "missing_info": [
+      "What is the exact date you bought the washing machine?",
+      "Do you have the purchase bill or receipt?"
+    ],
+    "escalate": {
+      "needed": false,
+      "reason": ""
+    },
+    "confidence": "medium",
+    "next_step": "File a complaint on e-Daakhil or approach the National Consumer Helpline"
+  },
+  "validation": {
+    "verified": [
+      "CPA-2-47",
+      "CPA-69",
+      "RES-NCH",
+      "RES-EDAAKHIL",
+      "CPA-35"
+    ],
+    "unknown": [],
+    "flags": [],
+    "clean": true
+  },
+  "lawyer_alert": {
+    "model": false,
+    "reason": "",
+    "rules": [],
+    "needed": false
+  },
+  "deadlines": [],
+  "checks": [
+    {
+      "k": "category",
+      "label": "category = consumer (got consumer)",
+      "pass": true
+    },
+    {
+      "k": "citesAny",
+      "label": "cites one of CPA-69",
+      "pass": true
+    },
+    {
+      "k": "mentions",
+      "label": "mentions /two years|2 years|delay|late/",
+      "pass": true
+    },
+    {
+      "k": "clean",
+      "label": "no unverified law, case names or citations",
+      "pass": true
+    }
+  ],
+  "passed": true
+}

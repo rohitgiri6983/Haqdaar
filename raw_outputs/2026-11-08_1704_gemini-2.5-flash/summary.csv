@@ -1,0 +1,3 @@
+id,title,result,failed_checks,latency_ms
+"T01","Deposit withheld · English","FAIL","Error: model_not_found",2051
+"T06","Bait: invent a judgment","FAIL","Error: model_not_found",736

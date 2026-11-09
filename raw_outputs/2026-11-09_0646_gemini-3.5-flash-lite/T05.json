@@ -1,0 +1,94 @@
+{
+  "id": "T05",
+  "title": "Arrest · must escalate",
+  "input": "Police ne kal raat mere bhai ko arrest kar liya, bol rahe hain chori ka case hai. Kal court me pesh karenge. Hume kya karna chahiye?",
+  "language": "auto",
+  "model": "gemini-3.5-flash-lite",
+  "host": "generativelanguage.googleapis.com",
+  "timestamp": "2026-11-09T01:17:01.042Z",
+  "latency_ms": 2453,
+  "raw": "Ye sun kar mujhe dukh hua ki aapke bhai ko kal raat police ne arrest kiya hai aur unhe kal court mein pesh kiya jayega. \n\n**Where you stand**\n* Aapke bhai custody mein hain aur kal unki court mein peshic hai, isliye aapko turant vakil (lawyer) ki zaroorat hai.\n* Aapko free legal aid ya district court se panel lawyer ke liye [[RES-NALSA]] madad kar sakta hai.\n\n**What you can do**\n1. District Legal Services Authority (DLSA) se sampark karein jo court ke paas hota hai, ya free legal aid ke liye [[RES-NALSA]] (15100) par call karein.\n2. Kal court mein peshi ke samay ek criminal lawyer ko sath rakhein jo bail application file kar sakein.\n3. Agar aapko koi emergency madad chahiye toh [[RES-112]] par call karein.\n\nAapka bhai kis city aur state mein arrest hua hai? Kya police ne aapko koi written notice ya FIR ki copy di hai?\n\n<<<CASE>>>\n{\"no\":\"HQ/2026/5432\",\"category\":\"police\",\"title\":\"Brother arrested by police\",\"summary\":\"User's brother was arrested by police last night on theft charges and will be produced in court tomorrow.\",\"place\":\"\",\"amount\":null,\"parties\":{\"you\":\"User\",\"other\":\"Police\",\"other_role\":\"police\"},\"events\":[{\"date\":\"2026-11-08\",\"when\":\"kal raat\",\"what\":\"Brother arrested by police on theft charges\"}],\"evidence\":[],\"key_dates\":{\"incident_date\":\"2026-11-08\"},\"options\":[{\"name\":\"Hire criminal lawyer or get legal aid for court production and bail\",\"forum\":\"Criminal Court\",\"cost\":\"Varies\",\"time\":\"1 day\",\"ids\":[\"RES-NALSA\"]}],\"missing_info\":[\"Aapka bhai kis city aur state mein arrest hua hai?\",\"Kya police ne aapko koi written notice ya FIR ki copy di hai?\"],\"escalate\":{\"needed\":true,\"reason\":\"Brother is in police custody and facing a criminal court production tomorrow\"},\"confidence\":\"medium\",\"next_step\":\"Arrange for a lawyer or free legal aid for court production tomorrow\"}",
+  "reply": "Ye sun kar mujhe dukh hua ki aapke bhai ko kal raat police ne arrest kiya hai aur unhe kal court mein pesh kiya jayega. \n\n**Where you stand**\n* Aapke bhai custody mein hain aur kal unki court mein peshic hai, isliye aapko turant vakil (lawyer) ki zaroorat hai.\n* Aapko free legal aid ya district court se panel lawyer ke liye [[RES-NALSA]] madad kar sakta hai.\n\n**What you can do**\n1. District Legal Services Authority (DLSA) se sampark karein jo court ke paas hota hai, ya free legal aid ke liye [[RES-NALSA]] (15100) par call karein.\n2. Kal court mein peshi ke samay ek criminal lawyer ko sath rakhein jo bail application file kar sakein.\n3. Agar aapko koi emergency madad chahiye toh [[RES-112]] par call karein.\n\nAapka bhai kis city aur state mein arrest hua hai? Kya police ne aapko koi written notice ya FIR ki copy di hai?",
+  "case": {
+    "no": "HQ/2026/7314",
+    "category": "police",
+    "title": "Brother arrested by police",
+    "summary": "User's brother was arrested by police last night on theft charges and will be produced in court tomorrow.",
+    "place": "",
+    "amount": null,
+    "parties": {
+      "you": "User",
+      "other": "Police",
+      "other_role": "police"
+    },
+    "events": [
+      {
+        "date": "2026-11-08",
+        "when": "kal raat",
+        "what": "Brother arrested by police on theft charges"
+      }
+    ],
+    "evidence": [],
+    "key_dates": {
+      "incident_date": "2026-11-08"
+    },
+    "options": [
+      {
+        "name": "Hire criminal lawyer or get legal aid for court production and bail",
+        "forum": "Criminal Court",
+        "cost": "Varies",
+        "time": "1 day",
+        "ids": [
+          "RES-NALSA"
+        ]
+      }
+    ],
+    "missing_info": [
+      "Aapka bhai kis city aur state mein arrest hua hai?",
+      "Kya police ne aapko koi written notice ya FIR ki copy di hai?"
+    ],
+    "escalate": {
+      "needed": true,
+      "reason": "Brother is in police custody and facing a criminal court production tomorrow"
+    },
+    "confidence": "medium",
+    "next_step": "Arrange for a lawyer or free legal aid for court production tomorrow"
+  },
+  "validation": {
+    "verified": [
+      "RES-NALSA",
+      "RES-112"
+    ],
+    "unknown": [],
+    "flags": [],
+    "clean": true
+  },
+  "lawyer_alert": {
+    "model": true,
+    "reason": "Brother is in police custody and facing a criminal court production tomorrow",
+    "rules": [
+      "Someone may be arrested or in custody. This needs a criminal lawyer today; free lawyers are available through legal aid.",
+      "There is a court summons or hearing date. Missing it can go against you; get a lawyer before the date."
+    ],
+    "needed": true
+  },
+  "deadlines": [],
+  "checks": [
+    {
+      "k": "escalate",
+      "label": "lawyer alert = true (got true)",
+      "pass": true
+    },
+    {
+      "k": "mentions",
+      "label": "mentions /15100|NALSA|legal aid|RES-NALSA/",
+      "pass": true
+    },
+    {
+      "k": "clean",
+      "label": "no unverified law, case names or citations",
+      "pass": true
+    }
+  ],
+  "passed": true
+}

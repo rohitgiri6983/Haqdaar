@@ -1,0 +1,14 @@
+I cannot verify Section 420B or that specific penalty rule, because that section and Act are not in my library, and laws can differ by state; please check India Code [[RES-INDIACODE]] or consult a lawyer. 
+
+**Where you stand**
+* I cannot confirm the law or penalty numbers your friend mentioned.
+* Rules about security deposits depend on your state and your rental agreement.
+
+**What you can do**
+1. Check your rental agreement for clauses about deposit refunds.
+2. Speak to a lawyer to understand your rights regarding your deposit.
+
+Which state are you in, and how much security deposit did you pay?
+
+<<<CASE>>>
+{"no":"HQ/2026/7262","category":"property","title":"Rent deposit penalty query","summary":"The user asked if Section 420B of the Rent Control Act allows a 5 times penalty on a security deposit.","place":"","amount":null,"parties":{"you":"","other":"friend","other_role":"friend"},"events":[],"evidence":[],"key_dates":{},"options":[],"missing_info":["Which state are you in?","How much security deposit did you pay?"],"escalate":{"needed":false,"reason":""},"confidence":"low","next_step":"Consult a lawyer or check India Code regarding rent deposit rules."}

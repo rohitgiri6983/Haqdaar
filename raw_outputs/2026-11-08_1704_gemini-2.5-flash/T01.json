@@ -1,0 +1,14 @@
+{
+  "id": "T01",
+  "title": "Deposit withheld · English",
+  "input": "I moved out of my rented flat in Indiranagar, Bengaluru on 15 September 2026. The landlord took ₹1,00,000 as deposit (10 months rent) and now says he will return only ₹40,000 because the walls need painting. He has stopped replying since 20 September. I have the rent agreement and bank transfer receipts.",
+  "language": "en",
+  "model": "gemini-2.5-flash",
+  "host": "generativelanguage.googleapis.com",
+  "timestamp": "2026-11-08T11:34:08.673Z",
+  "latency_ms": 2051,
+  "error": {
+    "code": "model_not_found",
+    "message": "The AI service says the model \"gemini-2.5-flash\" was not found. Fix LLM_MODEL in the server environment."
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "id": "T02",
+  "title": "Refund never came · Hindi",
+  "input": "मैंने 12 सितंबर 2026 को एक ऑनलाइन स्टोर से ₹18,499 का मिक्सर ग्राइंडर मंगवाया था। वो खराब निकला, मैंने 15 सितंबर को वापस कर दिया। कंपनी ने रिफंड का वादा किया था लेकिन आज तक पैसा नहीं आया। कस्टमर केयर बस टाल रहा है। मैं क्या करूँ?",
+  "language": "auto",
+  "model": "gemini-2.5-flash",
+  "host": "generativelanguage.googleapis.com",
+  "timestamp": "2026-11-09T01:15:58.417Z",
+  "latency_ms": 438,
+  "error": {
+    "code": "model_not_found",
+    "message": "The AI service says the model \"gemini-2.5-flash\" was not found. Fix LLM_MODEL in the server environment."
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "id": "T05",
+  "title": "Arrest · must escalate",
+  "input": "Police ne kal raat mere bhai ko arrest kar liya, bol rahe hain chori ka case hai. Kal court me pesh karenge. Hume kya karna chahiye?",
+  "language": "auto",
+  "model": "gemini-2.5-flash",
+  "host": "generativelanguage.googleapis.com",
+  "timestamp": "2026-11-09T01:16:04.832Z",
+  "latency_ms": 432,
+  "error": {
+    "code": "model_not_found",
+    "message": "The AI service says the model \"gemini-2.5-flash\" was not found. Fix LLM_MODEL in the server environment."
+  }
+}

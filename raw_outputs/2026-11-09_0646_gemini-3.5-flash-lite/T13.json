@@ -1,0 +1,94 @@
+{
+  "id": "T13",
+  "title": "Pension file stuck · RTI",
+  "input": "My father retired from a central government office in 2025 and his pension file has been stuck for 8 months. Nobody tells us the status. How can we find out?",
+  "language": "en",
+  "model": "gemini-3.5-flash-lite",
+  "host": "generativelanguage.googleapis.com",
+  "timestamp": "2026-11-09T01:17:31.016Z",
+  "latency_ms": 2076,
+  "raw": "I understand your father retired from a central government office in 2025 and his pension file has been stuck for 8 months without any update.\n\n**Where you stand**\n* Government offices are required to process pension papers smoothly, and prolonged delays can be challenged.\n* You have the right to ask for the exact status and reasons for the delay using official transparency channels.\n\n**What you can do**\n1. Send a written reminder letter or email to the head of office or pension department where he retired, asking for the file status.\n2. File a formal request under [[RTI-6]] to the Public Information Officer of that department to get the file movement details and reasons for delay; a central department reply is expected within 30 days [[RTI-7]].\n3. Lodge an online grievance on the Centralized Public Grievance Redress and Monitoring System (CPGRAMS) portal for prompt departmental tracking.\n\nWould you like help drafting an RTI request for the pension file status? Which central government department or ministry did your father retire from?\n\n<<<CASE>>>\n{\"no\":\"HQ/2026/5516\",\"category\":\"other\",\"title\":\"Delayed central government pension file\",\"summary\":\"A father retired from a central government office in 2025, but his pension file has been stuck for 8 months with no status updates.\",\"place\":\"\",\"amount\":null,\"parties\":{\"you\":\"Father\",\"other\":\"Department\",\"other_role\":\"employer\"},\"events\":[{\"date\":\"\",\"when\":\"2025\",\"what\":\"Father retired from central government office\"},{\"date\":\"\",\"when\":\"Last 8 months\",\"what\":\"Pension file stuck without status updates\"}],\"evidence\":[],\"key_dates\":{},\"options\":[{\"name\":\"RTI Request\",\"forum\":\"Public Information Officer\",\"cost\":\"10\",\"time\":\"30 days\",\"ids\":[\"RTI-6\",\"RTI-7\"]}],\"missing_info\":[\"Which central government department or ministry did your father retire from?\"],\"escalate\":{\"needed\":false,\"reason\":\"\"},\"confidence\":\"medium\",\"next_step\":\"File an RTI application or CPGRAMS grievance to check pension file status\"}",
+  "reply": "I understand your father retired from a central government office in 2025 and his pension file has been stuck for 8 months without any update.\n\n**Where you stand**\n* Government offices are required to process pension papers smoothly, and prolonged delays can be challenged.\n* You have the right to ask for the exact status and reasons for the delay using official transparency channels.\n\n**What you can do**\n1. Send a written reminder letter or email to the head of office or pension department where he retired, asking for the file status.\n2. File a formal request under [[RTI-6]] to the Public Information Officer of that department to get the file movement details and reasons for delay; a central department reply is expected within 30 days [[RTI-7]].\n3. Lodge an online grievance on the Centralized Public Grievance Redress and Monitoring System (CPGRAMS) portal for prompt departmental tracking.\n\nWould you like help drafting an RTI request for the pension file status? Which central government department or ministry did your father retire from?",
+  "case": {
+    "no": "HQ/2026/4128",
+    "category": "other",
+    "title": "Delayed central government pension file",
+    "summary": "A father retired from a central government office in 2025, but his pension file has been stuck for 8 months with no status updates.",
+    "place": "",
+    "amount": null,
+    "parties": {
+      "you": "Father",
+      "other": "Department",
+      "other_role": "employer"
+    },
+    "events": [
+      {
+        "date": "",
+        "when": "2025",
+        "what": "Father retired from central government office"
+      },
+      {
+        "date": "",
+        "when": "Last 8 months",
+        "what": "Pension file stuck without status updates"
+      }
+    ],
+    "evidence": [],
+    "key_dates": {},
+    "options": [
+      {
+        "name": "RTI Request",
+        "forum": "Public Information Officer",
+        "cost": "10",
+        "time": "30 days",
+        "ids": [
+          "RTI-6",
+          "RTI-7"
+        ]
+      }
+    ],
+    "missing_info": [
+      "Which central government department or ministry did your father retire from?"
+    ],
+    "escalate": {
+      "needed": false,
+      "reason": ""
+    },
+    "confidence": "medium",
+    "next_step": "File an RTI application or CPGRAMS grievance to check pension file status"
+  },
+  "validation": {
+    "verified": [
+      "RTI-6",
+      "RTI-7"
+    ],
+    "unknown": [],
+    "flags": [],
+    "clean": true
+  },
+  "lawyer_alert": {
+    "model": false,
+    "reason": "",
+    "rules": [],
+    "needed": false
+  },
+  "deadlines": [],
+  "checks": [
+    {
+      "k": "category",
+      "label": "category = rti (got other)",
+      "pass": false
+    },
+    {
+      "k": "citesAny",
+      "label": "cites one of RTI-6, RTI-7, RES-RTIONLINE",
+      "pass": true
+    },
+    {
+      "k": "clean",
+      "label": "no unverified law, case names or citations",
+      "pass": true
+    }
+  ],
+  "passed": false
+}

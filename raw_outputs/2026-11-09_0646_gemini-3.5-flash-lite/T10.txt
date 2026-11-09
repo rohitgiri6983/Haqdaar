@@ -1,0 +1,14 @@
+It sounds like you lost ₹25,000 yesterday when someone tricked you into sharing an OTP for a UPI transaction. 
+
+**Where you stand**
+- You are a victim of online financial fraud [[RBI-LIAB]].
+- Acting immediately gives you the best chance to freeze the transaction [[RES-CYBER]].
+
+**What you can do**
+1. Call [[RES-CYBER]] right now at 1930 or go to cybercrime.gov.in to report the fraud and block the money.
+2. Call your bank immediately to block your account and report the unauthorised transaction [[RBI-LIAB]].
+
+To help you further, which bank holds your account, and do you have the transaction ID or SMS proof?
+
+<<<CASE>>>
+{"no":"HQ/2026/3007","category":"fraud","title":"UPI fraud through shared OTP","summary":"The user was tricked by a fake bank call into sharing an OTP, resulting in an unauthorised UPI deduction of 25000 rupees yesterday.","place":"","amount":25000,"parties":{"you":"","other":"fake bank caller","other_role":"bank impersonator"},"events":[{"date":"2026-11-08","when":"yesterday","what":"fraudulent UPI deduction of 25000 rupees after sharing OTP"}],"evidence":[{"item":"SMS alert","status":"have","why":"shows transaction details"}],"key_dates":{"incident_date":"2026-11-08"},"options":[{"name":"Cyber Crime Reporting","forum":"Cyber Crime Cell","cost":"Free","time":"Immediate","ids":["RES-CYBER"]}],"missing_info":["Which bank holds your account?","Do you have the transaction reference number or SMS?"],"escalate":{"needed":false,"reason":""},"confidence":"medium","next_step":"Call 1930 immediately to report the fraud."}

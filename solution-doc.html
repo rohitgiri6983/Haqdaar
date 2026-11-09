@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AI‑Lawyer Prototype – Solution Overview</title>
+<style>
+body {font-family: Arial, sans-serif; margin: 2rem; line-height: 1.5;}
+h1, h2, h3 {margin-top: 1.5rem;}
+pre {background:#f4f4f4; padding:0.5rem; overflow:auto;}
+</style>
+</head>
+<body>
+<h1>AI‑Lawyer Prototype – Solution Overview (2‑page Summary)</h1>
+<p><strong>Project:</strong> Haqdaar – AI Lawyer<br>
+<strong>Assignment:</strong> Kuku FM AI Generalist – Problem 2</p>
+<hr>
+<h2>1. Goal & Core Requirements</h2>
+<ul>
+<li>Conversational AI (text & voice) for everyday legal problems in India.</li>
+<li>Public prototype URL – no login or personal API key required.</li>
+<li>Model‑swap friendly – model chosen only via <code>.env</code> variables.</li>
+<li>Re‑runnable test: <code>.\node.cmd run_tests.mjs</code> produces raw outputs.</li>
+<li>Raw outputs for 14 test cases stored in <code>raw_outputs/</code>.</li>
+<li>Free‑tier services only; no paid APIs.</li>
+<li>Honesty: AI only cites laws using <code>[[ID]]</code> tokens from a built‑in library.</li>
+<li>Explicit safety alerts when user mentions arrests, court, etc.</li>
+</ul>
+<hr>
+<h2>2. Architecture Snapshot</h2>
+<pre>
+haqdaar/
+├─ index.html          ← UI (loads core.js & llm())
+├─ core.js             ← Pure logic (prompts, validation, deadlines, escalation)
+├─ lib/llm.js          ← Generic OpenAI‑compatible client (env‑driven)
+├─ api/chat.js         ← Vercel serverless function – thin proxy to lib/llm.js
+├─ dev-server.mjs      ← Local static server + /api/chat routing
+├─ run_tests.mjs       ← CLI runner – writes raw_outputs/
+├─ tests/
+│   ├─ cases.json     ← Single source of truth for test cases
+│   └─ unit.test.mjs  ← Node --test unit tests (validate, deadlines, escalation)
+├─ docs/
+│   ├─ fact-sheet.md  ← Architecture, cost, scaling notes
+│   └─ ai-mistakes.md ← Log of anti‑hallucination failures
+├─ .env                ← Runtime config – **never committed**
+└─ README.md           ← Project description, deployment guide
+</pre>
+<p>All JavaScript runs on plain <strong>Node 18+</strong>, no external npm packages.</p>
+<hr>
+<h2>3. Model Swap Point</h2>
+<p>All model info lives in <code>.env</code>:</p>
+<pre>
+LLM_BASE_URL=https://generativelanguage.googleapis.com/v1beta/openai   # or any OpenAI‑compatible endpoint
+LLM_API_KEY=YOUR_KEY
+LLM_MODEL=gpt-oss-120b               # current free model (or gemini‑3.8‑flash, etc.)
+LLM_MODEL_FAST=gpt-oss-120b-fast      # optional – used for Practice mode
+</pre>
+<p>Changing a model requires only editing <code>.env</code> and restarting the dev server.</p>
+<hr>
+<h2>4. Running & Testing</h2>
+<ol>
+<li>Configure <code>.env</code> (API key + valid free model ID).</li>
+<li>Start locally – <code>npm run dev</code> (or <code>.\node.cmd dev-server.mjs</code>).</li>
+<li>Run full suite – <code>.\node.cmd run_tests.mjs</code>.
+<ul><li>Generates <code>raw_outputs/&lt;case&gt;.txt</code> (exact LLM responses) and <code>summary.md</code>.</li>
+<li>Ensures reproducibility: a reviewer can run the same command on a fresh clone.</li></ul>
+</li>
+<li>(Optional) Deploy – push to GitHub, create a Vercel project, add the same env vars, and deploy. HTTPS enables the Web Speech API.</li>
+</ol>
+<hr>
+<h2>5. Honesty & Anti‑Hallucination Design</h2>
+<ul>
+<li><strong>LIB</strong>: 42 verified law entries.</li>
+<li>AI may cite only via <code>[[ID]]</code>; <code>core.js</code> expands these tokens.</li>
+<li><code>validate()</code> flags unknown sections, case names, AIR/SCC citations, raw statutes, and missing <code>[[ID]]</code>.</li>
+<li>If validation fails or <code>/api/chat</code> is unreachable, UI falls back to <em>“AI unavailable – basic guide”</em>.</li>
+<li>Escalation regex (<code>clientEscalation()</code>, <code>CRISIS</code>) shows a safety card recommending a real lawyer.</li>
+</ul>
+<hr>
+<h2>6. Cost & Scaling (Free‑Tier Only)</h2>
+<table border="1" cellpadding="4" cellspacing="0">
+<tr><th>Provider</th><th>Free‑tier limits</th><th>Tokens per request</th><th>Approx. cost for 14‑case run</th></tr>
+<tr><td>Gemini (Flash)</td><td>$10 K credit, 100 K tokens/month</td><td>~1 200</td><td>$0 (within free quota)</td></tr>
+<tr><td>OpenAI (gpt‑3.5‑turbo)</td><td>$5 USD credit, 75 K tokens/month</td><td>~1 200</td><td>&lt;$0.01</td></tr>
+<tr><td>GPT‑OSS 120B</td><td>Fully free, unlimited (rate‑limited)</td><td>~1 200</td><td>$0</td></tr>
+</table>
+<p>All requests capped at ~60 KB payload (≈30 turns) to stay well within limits.</p>
+<hr>
+<h2>7. What to Submit</h2>
+<ol>
+<li>Public prototype link (Vercel URL or <code>http://localhost:3000</code>).</li>
+<li><code>raw_outputs.zip</code> – raw LLM responses for the 14 test cases.</li>
+<li><code>README.md</code> – architecture, run‑instructions, deployment steps.</li>
+<li>2‑page PDF – the content above (print this page to PDF or use a markdown‑to‑PDF tool).</li>
+</ol>
+<hr>
+<p><em>All decisions are documented, the model is easily swappable, and the system can be reproduced with a single command.</em></p>
+</body>
+</html>
+

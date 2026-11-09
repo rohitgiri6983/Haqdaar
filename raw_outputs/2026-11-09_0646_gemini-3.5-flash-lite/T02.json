@@ -1,0 +1,147 @@
+{
+  "id": "T02",
+  "title": "Refund never came · Hindi",
+  "input": "मैंने 12 सितंबर 2026 को एक ऑनलाइन स्टोर से ₹18,499 का मिक्सर ग्राइंडर मंगवाया था। वो खराब निकला, मैंने 15 सितंबर को वापस कर दिया। कंपनी ने रिफंड का वादा किया था लेकिन आज तक पैसा नहीं आया। कस्टमर केयर बस टाल रहा है। मैं क्या करूँ?",
+  "language": "auto",
+  "model": "gemini-3.5-flash-lite",
+  "host": "generativelanguage.googleapis.com",
+  "timestamp": "2026-11-09T01:16:48.397Z",
+  "latency_ms": 3579,
+  "raw": "आपने 12 सितंबर 2026 को ₹18,499 में ऑनलाइन मिक्सर ग्राइंडर खरीदा था, वह खराब निकला, और 15 सितंबर को वापस करने के बावजूद कंपनी ने वादा करने पर भी रिफंड नहीं दिया है।\n\n**Where you stand**\n* आपको खराब सामान के बदले रिफंड पाने का अधिकार है [[CPA-2-7]], [[CPA-2-11]], [[CPA-2-47]].\n* आप नेशनल कंज्यूमर हेल्पलाइन पर शिकायत दर्ज कर सकते हैं [[RES-NCH]].\n\n**What you can do**\n1. कंपनी के ग्रीवांस ऑफिसर को ईमेल या पोर्टल के जरिए लिखित शिकायत भेजें, क्योंकि ई-कॉमर्स कंपनियों को तय समय में जवाब देना होता है [[CPA-ECOM]].\n2. नेशनल कंज्यूमर हेल्पलाइन [[RES-NCH]] पर कॉल 1915 पर संपर्क करें या ऑनलाइन शिकायत दर्ज करें।\n3. यदि वहां हल न मिले, तो ई-डखिला पोर्टल [[RES-EDAAKHIL]] के माध्यम से कंज्यूमर कमीशन में मुफ्त [[CPA-FEE]] शिकायत दर्ज कर सकते हैं [[CPA-35]].\n\nक्या आपके पास कंपनी का रिफंड का वादा या वापसी की रसीद है? क्या आप उस ऑनलाइन स्टोर का नाम बता सकते हैं?\n\n<<<CASE>>>\n{\"no\":\"HQ/2026/9861\",\"category\":\"consumer\",\"title\":\"Online mixer grinder refund delayed\",\"summary\":\"Purchased a mixer grinder for Rs 18,499 on 12 Sep 2026, returned defective item on 15 Sep 2026, but refund is pending despite promises.\",\"place\":\"\",\"amount\":18499,\"parties\":{\"you\":\"\",\"other\":\"Online Store\",\"other_role\":\"e-commerce seller\"},\"events\":[{\"date\":\"2026-09-12\",\"when\":\"12 सितंबर 2026\",\"what\":\"Purchased mixer grinder online\"},{\"date\":\"2026-09-15\",\"when\":\"15 सितंबर 2026\",\"what\":\"Returned defective mixer grinder\"}],\"evidence\":[{\"item\":\"Purchase invoice/receipt\",\"status\":\"have\",\"why\":\"Proof of purchase and amount\"},{\"item\":\"Return pickup proof\",\"status\":\"have\",\"why\":\"Proof of returning the item\"}],\"key_dates\":{\"cause_of_action\":\"2026-09-15\",\"exit_date\":\"\",\"dishonour_date\":\"\",\"notice_served_date\":\"\",\"incident_date\":\"\",\"rti_filed_date\":\"\"},\"options\":[{\"name\":\"National Consumer Helpline\",\"forum\":\"NCH\",\"cost\":\"Free\",\"time\":\"1-2 weeks\",\"ids\":[\"RES-NCH\"]},{\"name\":\"Consumer Commission\",\"forum\":\"District Consumer Commission\",\"cost\":\"Free\",\"time\":\"1-3 months\",\"ids\":[\"CPA-34\",\"CPA-35\",\"CPA-FEE\",\"RES-EDAAKHIL\"]}],\"missing_info\":[\"क्या आपके पास रिटर्न की रसीद या चैट/ईमेल का सबूत है?\",\"उस ऑनलाइन स्टोर का नाम क्या है?\"],\"escalate\":{\"needed\":false,\"reason\":\"\"},\"confidence\":\"high\",\"next_step\":\"File a complaint on National Consumer Helpline (1915)\"}",
+  "reply": "आपने 12 सितंबर 2026 को ₹18,499 में ऑनलाइन मिक्सर ग्राइंडर खरीदा था, वह खराब निकला, और 15 सितंबर को वापस करने के बावजूद कंपनी ने वादा करने पर भी रिफंड नहीं दिया है।\n\n**Where you stand**\n* आपको खराब सामान के बदले रिफंड पाने का अधिकार है [[CPA-2-7]], [[CPA-2-11]], [[CPA-2-47]].\n* आप नेशनल कंज्यूमर हेल्पलाइन पर शिकायत दर्ज कर सकते हैं [[RES-NCH]].\n\n**What you can do**\n1. कंपनी के ग्रीवांस ऑफिसर को ईमेल या पोर्टल के जरिए लिखित शिकायत भेजें, क्योंकि ई-कॉमर्स कंपनियों को तय समय में जवाब देना होता है [[CPA-ECOM]].\n2. नेशनल कंज्यूमर हेल्पलाइन [[RES-NCH]] पर कॉल 1915 पर संपर्क करें या ऑनलाइन शिकायत दर्ज करें।\n3. यदि वहां हल न मिले, तो ई-डखिला पोर्टल [[RES-EDAAKHIL]] के माध्यम से कंज्यूमर कमीशन में मुफ्त [[CPA-FEE]] शिकायत दर्ज कर सकते हैं [[CPA-35]].\n\nक्या आपके पास कंपनी का रिफंड का वादा या वापसी की रसीद है? क्या आप उस ऑनलाइन स्टोर का नाम बता सकते हैं?",
+  "case": {
+    "no": "HQ/2026/4804",
+    "category": "consumer",
+    "title": "Online mixer grinder refund delayed",
+    "summary": "Purchased a mixer grinder for Rs 18,499 on 12 Sep 2026, returned defective item on 15 Sep 2026, but refund is pending despite promises.",
+    "place": "",
+    "amount": 18499,
+    "parties": {
+      "you": "",
+      "other": "Online Store",
+      "other_role": "e-commerce seller"
+    },
+    "events": [
+      {
+        "date": "2026-09-12",
+        "when": "12 सितंबर 2026",
+        "what": "Purchased mixer grinder online"
+      },
+      {
+        "date": "2026-09-15",
+        "when": "15 सितंबर 2026",
+        "what": "Returned defective mixer grinder"
+      }
+    ],
+    "evidence": [
+      {
+        "item": "Purchase invoice/receipt",
+        "status": "have",
+        "why": "Proof of purchase and amount"
+      },
+      {
+        "item": "Return pickup proof",
+        "status": "have",
+        "why": "Proof of returning the item"
+      }
+    ],
+    "key_dates": {
+      "cause_of_action": "2026-09-15",
+      "exit_date": "",
+      "dishonour_date": "",
+      "notice_served_date": "",
+      "incident_date": "",
+      "rti_filed_date": ""
+    },
+    "options": [
+      {
+        "name": "National Consumer Helpline",
+        "forum": "NCH",
+        "cost": "Free",
+        "time": "1-2 weeks",
+        "ids": [
+          "RES-NCH"
+        ]
+      },
+      {
+        "name": "Consumer Commission",
+        "forum": "District Consumer Commission",
+        "cost": "Free",
+        "time": "1-3 months",
+        "ids": [
+          "CPA-34",
+          "CPA-35",
+          "CPA-FEE",
+          "RES-EDAAKHIL"
+        ]
+      }
+    ],
+    "missing_info": [
+      "क्या आपके पास रिटर्न की रसीद या चैट/ईमेल का सबूत है?",
+      "उस ऑनलाइन स्टोर का नाम क्या है?"
+    ],
+    "escalate": {
+      "needed": false,
+      "reason": ""
+    },
+    "confidence": "high",
+    "next_step": "File a complaint on National Consumer Helpline (1915)"
+  },
+  "validation": {
+    "verified": [
+      "CPA-2-7",
+      "CPA-2-11",
+      "CPA-2-47",
+      "RES-NCH",
+      "CPA-ECOM",
+      "RES-EDAAKHIL",
+      "CPA-FEE",
+      "CPA-35"
+    ],
+    "unknown": [],
+    "flags": [],
+    "clean": true
+  },
+  "lawyer_alert": {
+    "model": false,
+    "reason": "",
+    "rules": [],
+    "needed": false
+  },
+  "deadlines": [
+    {
+      "label": "File consumer complaint by",
+      "date": "2028-09-15",
+      "cite": "CPA-69",
+      "note": "Two years from when the problem arose."
+    }
+  ],
+  "checks": [
+    {
+      "k": "category",
+      "label": "category = consumer (got consumer)",
+      "pass": true
+    },
+    {
+      "k": "script",
+      "label": "reply in hi script (517 chars)",
+      "pass": true
+    },
+    {
+      "k": "citesAny",
+      "label": "cites one of CPA-2-11, CPA-2-47, CPA-ECOM, RES-NCH, CPA-34, CPA-69",
+      "pass": true
+    },
+    {
+      "k": "escalate",
+      "label": "lawyer alert = false (got false)",
+      "pass": true
+    },
+    {
+      "k": "clean",
+      "label": "no unverified law, case names or citations",
+      "pass": true
+    }
+  ],
+  "passed": true
+}

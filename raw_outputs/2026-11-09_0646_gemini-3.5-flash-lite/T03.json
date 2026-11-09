@@ -1,0 +1,124 @@
+{
+  "id": "T03",
+  "title": "Salary + final settlement · Hinglish",
+  "input": "Maine 30 September 2026 ko resign kiya, notice period bhi serve kiya. Company ne August aur September ki salary nahi di, total ₹84,000 baaki hai. HR bolta hai funds aayenge tab denge. Main Noida me kaam karta tha. Kya kar sakta hoon?",
+  "language": "auto",
+  "model": "gemini-3.5-flash-lite",
+  "host": "generativelanguage.googleapis.com",
+  "timestamp": "2026-11-09T01:16:52.998Z",
+  "latency_ms": 3091,
+  "raw": "Maine samajh liya ki aapne 30 September 2026 ko Noida ki company se resign kiya, aur aapki August aur September ki ₹84,000 salary abhi tak nahi mili hai.\n\n**Where you stand**\n* Aapki company ke paas rules ke mutabiq resignation ke baad bachi hui salary jaldi dene ki zimmedari thi [[COW-17]].\n* Aap [[COW-45]] ke tahat apni mehnat ki kamaai ke liye formal claim daal sakte hain.\n\n**What you can do**\n1. Company ko ek written demand email ya letter bhejiye jisme ₹84,000 jaldi dene ko kahiye [[ICA-73]].\n2. Agar company tab bhi na maane, toh Noida ke labour authority ya designated officer ke paas apni complaint register kariye [[COW-45]].\n3. Agar zaroorat pade aur aapko free legal advice chahiye, toh [[RES-NALSA]] (15100) par call kar sakte hain ya District Legal Services Authority ja sakte hain.\n\nKya aapke paas resignation ka mail ya letter aur salary slip hai? Aur kis state ya city ki company thi?\n\n<<<CASE>>>\n{\"no\":\"HQ/2026/7123\",\"category\":\"salary\",\"title\":\"Unpaid salary after resignation in Noida\",\"summary\":\"The user resigned on 30 September 2026 after serving notice period in Noida, but the employer has not paid August and September salary totaling ₹84,000.\",\"place\":\"Noida, Uttar Pradesh\",\"amount\":84000,\"parties\":{\"you\":\"\",\"other\":\"\",\"other_role\":\"company / employer\"},\"events\":[{\"date\":\"2026-09-30\",\"when\":\"30 September 2026\",\"what\":\"Resigned and served notice period\"}],\"evidence\":[{\"item\":\"Resignation email or letter\",\"status\":\"have\",\"why\":\"Proof of employment end\"},{\"item\":\"Salary slips for August and September\",\"status\":\"have\",\"why\":\"Proof of unpaid amount\"}],\"key_dates\":{\"cause_of_action\":\"2026-09-30\",\"exit_date\":\"2026-09-30\"},\"options\":[{\"name\":\"Labour Authority Claim\",\"forum\":\"Labour Authority\",\"cost\":\"Free\",\"time\":\"1 to 3 months\",\"ids\":[\"COW-17\",\"COW-45\"]}],\"missing_info\":[\"Kya aapke paas resignation ka proof aur salary slip hai?\",\"Company ka exact naam ya location kya hai?\"],\"escalate\":{\"needed\":false,\"reason\":\"\"},\"confidence\":\"medium\",\"next_step\":\"Send a written demand to the company and prepare to file a claim before the labour authority\"}",
+  "reply": "Maine samajh liya ki aapne 30 September 2026 ko Noida ki company se resign kiya, aur aapki August aur September ki ₹84,000 salary abhi tak nahi mili hai.\n\n**Where you stand**\n* Aapki company ke paas rules ke mutabiq resignation ke baad bachi hui salary jaldi dene ki zimmedari thi [[COW-17]].\n* Aap [[COW-45]] ke tahat apni mehnat ki kamaai ke liye formal claim daal sakte hain.\n\n**What you can do**\n1. Company ko ek written demand email ya letter bhejiye jisme ₹84,000 jaldi dene ko kahiye [[ICA-73]].\n2. Agar company tab bhi na maane, toh Noida ke labour authority ya designated officer ke paas apni complaint register kariye [[COW-45]].\n3. Agar zaroorat pade aur aapko free legal advice chahiye, toh [[RES-NALSA]] (15100) par call kar sakte hain ya District Legal Services Authority ja sakte hain.\n\nKya aapke paas resignation ka mail ya letter aur salary slip hai? Aur kis state ya city ki company thi?",
+  "case": {
+    "no": "HQ/2026/8095",
+    "category": "salary",
+    "title": "Unpaid salary after resignation in Noida",
+    "summary": "The user resigned on 30 September 2026 after serving notice period in Noida, but the employer has not paid August and September salary totaling ₹84,000.",
+    "place": "Noida, Uttar Pradesh",
+    "amount": 84000,
+    "parties": {
+      "you": "",
+      "other": "",
+      "other_role": "company / employer"
+    },
+    "events": [
+      {
+        "date": "2026-09-30",
+        "when": "30 September 2026",
+        "what": "Resigned and served notice period"
+      }
+    ],
+    "evidence": [
+      {
+        "item": "Resignation email or letter",
+        "status": "have",
+        "why": "Proof of employment end"
+      },
+      {
+        "item": "Salary slips for August and September",
+        "status": "have",
+        "why": "Proof of unpaid amount"
+      }
+    ],
+    "key_dates": {
+      "cause_of_action": "2026-09-30",
+      "exit_date": "2026-09-30"
+    },
+    "options": [
+      {
+        "name": "Labour Authority Claim",
+        "forum": "Labour Authority",
+        "cost": "Free",
+        "time": "1 to 3 months",
+        "ids": [
+          "COW-17",
+          "COW-45"
+        ]
+      }
+    ],
+    "missing_info": [
+      "Kya aapke paas resignation ka proof aur salary slip hai?",
+      "Company ka exact naam ya location kya hai?"
+    ],
+    "escalate": {
+      "needed": false,
+      "reason": ""
+    },
+    "confidence": "medium",
+    "next_step": "Send a written demand to the company and prepare to file a claim before the labour authority"
+  },
+  "validation": {
+    "verified": [
+      "COW-17",
+      "COW-45",
+      "ICA-73",
+      "RES-NALSA"
+    ],
+    "unknown": [],
+    "flags": [],
+    "clean": true
+  },
+  "lawyer_alert": {
+    "model": false,
+    "reason": "",
+    "rules": [],
+    "needed": false
+  },
+  "deadlines": [
+    {
+      "label": "Final dues were due by",
+      "date": "2026-10-02",
+      "cite": "COW-17",
+      "note": "Two working days after leaving (weekends skipped; public holidays may add a day)."
+    },
+    {
+      "label": "File wage claim with the authority by",
+      "date": "2029-09-30",
+      "cite": "COW-45",
+      "note": "Three years from when the claim arose."
+    }
+  ],
+  "checks": [
+    {
+      "k": "category",
+      "label": "category = salary (got salary)",
+      "pass": true
+    },
+    {
+      "k": "citesAny",
+      "label": "cites one of COW-17, COW-45",
+      "pass": true
+    },
+    {
+      "k": "deadlineLabel",
+      "label": "deadline “Final dues were due by” computed",
+      "pass": true
+    },
+    {
+      "k": "clean",
+      "label": "no unverified law, case names or citations",
+      "pass": true
+    }
+  ],
+  "passed": true
+}

@@ -1,0 +1,18 @@
+[[ID]]
+Because you received a legal notice threatening civil and criminal proceedings [[ID]], **you should speak to a real lawyer [[ID]] right away.** Since your income [[ID]] might qualify you for free help, you can also contact [[ID]] for free legal advice and a free lawyer [[ID]].
+
+You received a legal notice [[ID]] from [[ID]] demanding [[ID]] for a Google review [[ID]].
+
+**Where you stand**
+* A legal notice [[ID]] is a formal warning, not a court order [[ID]], but ignoring it can lead to a lawsuit.
+* Truthful reviews about poor service [[ID]] are generally protected [[ID]], but legal [[ID]] fights can be complex and expensive.
+
+**What you can do**
+1. **Consult a lawyer [[ID]]:** Take the notice [[ID]] to a local advocate or [[ID]] [[ID]] to draft a proper reply.
+2. **Gather evidence [[ID]]:** Collect bills, photos, or chats [[ID]] showing the work was late and poor.
+3. **Do not panic:** You do not have to pay [[ID]] immediately [[ID]], but do not miss the 15-day deadline [[ID]].
+
+Did you keep copies of your bills or messages with Sunrise Interiors? Which city and state [[ID]] are you located in?
+
+<<<CASE>>>
+{"no":"HQ/2026/8995","category":"notice","title":"Legal notice for Google review","summary":"User received a legal notice demanding Rs. 2,00,000 for a negative Google review about delayed and poor work.","place":"","amount":200000,"parties":{"you":"","other":"Sunrise Interiors","other_role":"interior design company"},"events":[{"date":"","when":"Recently","what":"Received legal notice demanding Rs. 2,00,000 for defamatory review"}],"evidence":[{"item":"Google review","status":"have","why":"Proof of what was posted"},{"item":"Bills, messages or photos of work","status":"have","why":"Proof of late and poor work"}],"key_dates":{"cause_of_action":"","exit_date":"","dishonour_date":"","notice_served_date":"","incident_date":"","rti_filed_date":""},"options":[{"name":"Consult advocate","forum":"Civil Court","cost":"Varies","time":"As needed","ids":[]}],"missing_info":["Did you keep copies of your bills or messages with Sunrise Interiors?","Which city and state are you located in?"],"escalate":{"needed":true,"reason":"Legal notice threatening civil and criminal proceedings received"},"confidence":"high","next_step":"Consult a lawyer or Legal Services Authority immediately"}

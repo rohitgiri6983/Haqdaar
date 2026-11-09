@@ -1,0 +1,14 @@
+You moved out on 15 September 2026, and your landlord in Bengaluru is wrongly withholding ₹60,000 of your ₹1,00,000 security deposit for painting without replying.
+
+**Where you stand**
+* You have clear written proof through your rent agreement and bank transfer receipts.
+* Withholding a deposit without valid reason is a breach of agreement under [[ICA-73]].
+
+**What you can do**
+1. Send a written demand notice [[ICA-73]] to the landlord asking for the full balance within a set date.
+2. If he refuses, you can approach the civil court to recover your money [[ICA-73]].
+
+Would you like me to draft a demand letter to your landlord for the return of your deposit? Which state are you currently living in, and does your rent agreement have a clause about painting deductions?
+
+<<<CASE>>>
+{"no":"HQ/2026/5768","category":"deposit","title":"Unreturned security deposit after moving out","summary":"Landlord in Bengaluru withheld ₹60,000 from a ₹1,00,000 security deposit for wall painting after tenant moved out on 15 September 2026.","place":"Bengaluru, Karnataka","amount":100000,"parties":{"you":"","other":"","other_role":"landlord"},"events":[{"date":"2026-09-15","when":"15 September 2026","what":"Moved out of rented flat"},{"date":"2026-09-20","when":"20 September 2026","what":"Landlord stopped replying"}],"evidence":[{"item":"rent agreement","status":"have","why":"Proves tenancy and deposit terms"},{"item":"bank transfer receipts","status":"have","why":"Proves deposit amount paid"}],"key_dates":{"cause_of_action":"2026-09-20"},"options":[{"name":"Send written demand","forum":"Direct to Landlord","cost":"Free","time":"1 week","ids":["ICA-73"]},{"name":"Civil suit for recovery","forum":"Civil Court","cost":"Court fee applies","time":"Several months","ids":["ICA-73","LIM-ART55"]}],"missing_info":["Which state are you currently living in?","Does your rent agreement have a specific clause about painting deductions?"],"escalate":{"needed":false,"reason":""},"confidence":"high","next_step":"Send a written demand to the landlord for the balance deposit."}

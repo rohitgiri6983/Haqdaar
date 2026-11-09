@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Haqdaar — AI Legal Help for India</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rozha+One&family=Mukta:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+Bengali:wght@400;600&family=Noto+Sans+Tamil:wght@400;600&family=Noto+Sans+Telugu:wght@400;600&family=Noto+Sans+Kannada:wght@400;600&family=Noto+Sans+Malayalam:wght@400;600&family=Noto+Sans+Gujarati:wght@400;600&family=Noto+Sans+Gurmukhi:wght@400;600&family=Noto+Sans+Oriya:wght@400;600&family=Noto+Naskh+Arabic:wght@400;600&display=swap">
+<style>
+/* Layout: one conversation column like a hearing transcript; the case file is a khaki folder docked right on wide screens, a slide-over on phones. */
+:root{
+  --bg:#F2F1F7; --surface:#FFFFFF; --ink:#1B1930; --muted:#635F7A; --line:#DFDCEB;
+  --stamp:#5434C0; --stamp-soft:#ECE7FB; --stamp-ink:#FFFFFF;
+  --khaki:#EEE3C4; --khaki-deep:#E2D3A8; --khaki-ink:#43391D;
+  --tape:#C1302A; --tape-soft:#FBE8E6;
+  --leaf:#1B7650; --leaf-soft:#E1F2E9;
+  --amber:#8E5B00; --amber-soft:#FFF0D2;
+  --you:#E9E5F8; --paper:#FFFEFA; --paper-line:#E9E4D3;
+  --shadow:0 1px 2px rgba(27,25,48,.06),0 8px 24px rgba(27,25,48,.06);
+  --f-display:"Rozha One","Noto Naskh Arabic",Georgia,serif;
+  --f-body:"Mukta","Noto Sans Bengali","Noto Sans Tamil","Noto Sans Telugu","Noto Sans Kannada","Noto Sans Malayalam","Noto Sans Gujarati","Noto Sans Gurmukhi","Noto Sans Oriya","Noto Naskh Arabic",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0F0E1A; --surface:#1A1829; --ink:#ECEAF6; --muted:#A39FBB; --line:#2E2B45;
+  --stamp:#A48FFF; --stamp-soft:#2A2352; --stamp-ink:#140F2E;
+  --khaki:#2B271B; --khaki-deep:#3A3424; --khaki-ink:#EADFBC;
+  --tape:#FF7166; --tape-soft:#3A1D1D;
+  --leaf:#53C892; --leaf-soft:#16302A;
+  --amber:#F2B54C; --amber-soft:#33280F;
+  --you:#25213F; --paper:#1E1C2C; --paper-line:#34304A;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0F0E1A; --surface:#1A1829; --ink:#ECEAF6; --muted:#A39FBB; --line:#2E2B45;
+  --stamp:#A48FFF; --stamp-soft:#2A2352; --stamp-ink:#140F2E;
+  --khaki:#2B271B; --khaki-deep:#3A3424; --khaki-ink:#EADFBC;
+  --tape:#FF7166; --tape-soft:#3A1D1D;
+  --leaf:#53C892; --leaf-soft:#16302A;
+  --amber:#F2B54C; --amber-soft:#33280F;
+  --you:#25213F; --paper:#1E1C2C; --paper-line:#34304A;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);
+  color-scheme:dark}
+
+/* claude.ai added this rule for us; on plain hosting we must add it, or .voice/.sheet/.overlay (display:flex/grid) ignore the hidden attribute and cover the page */
+[hidden]{display:none!important}
+*,*::before,*::after{box-sizing:border-box}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:12px;overflow:hidden}
+button,select,input,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--stamp);outline-offset:2px;border-radius:6px}
+a{color:var(--stamp)}
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+
+/* ---------- shell ---------- */
+.layout{height:100%;display:grid;grid-template-columns:minmax(0,1fr);gap:16px;max-width:1320px;margin:0 auto}
+.chatcol{min-width:0;display:grid;grid-template-rows:auto minmax(0,1fr) auto;background:var(--surface);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);overflow:hidden}
+@media (min-width:1180px){.layout{grid-template-columns:minmax(0,1fr) 400px}}
+
+/* header */
+.top{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.brand{display:flex;align-items:baseline;gap:10px;margin-right:auto;min-width:0}
+.brand h1{font-family:var(--f-display);font-weight:400;font-size:28px;line-height:1;margin:0;letter-spacing:.2px}
+.brand .dev{font-family:var(--f-display);color:var(--stamp);font-size:20px}
+.brand small{color:var(--muted);font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+@media (max-width:640px){.brand small{display:none}}
+.tools{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.iconbtn{display:inline-flex;align-items:center;gap:6px;height:38px;padding:0 10px;border-radius:10px;border:1px solid var(--line);background:var(--surface);font-size:14px;font-weight:500}
+.iconbtn:hover{border-color:var(--stamp)}
+.iconbtn[aria-pressed="true"]{background:var(--stamp-soft);border-color:var(--stamp);color:var(--stamp)}
+.iconbtn svg{width:18px;height:18px;flex:none}
+.iconbtn .lbl{white-space:nowrap}
+@media (max-width:760px){.iconbtn .lbl{display:none}}
+.langsel{height:38px;border-radius:10px;border:1px solid var(--line);background:var(--surface);padding:0 8px;font-size:14px;max-width:150px}
+.badge{font-family:var(--f-mono);font-size:11px;background:var(--stamp);color:var(--stamp-ink);border-radius:999px;padding:0 6px;line-height:18px}
+.casebtn-wide{display:inline-flex}
+@media (min-width:1180px){.casebtn-wide{display:none}}
+.engine{display:inline-flex;align-items:center;gap:6px;font-family:var(--f-mono);font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);padding:3px 8px;border:1px solid var(--line);border-radius:999px;background:transparent}
+.engine i{width:7px;height:7px;border-radius:50%;background:var(--muted)}
+.engine[data-mode="claude"] i,.engine[data-mode="api"] i{background:var(--leaf)}
+.engine[data-mode="offline"] i{background:var(--amber)}
+.engine[data-mode="detecting"] i{background:var(--stamp);animation:pulse 1s infinite}
+@keyframes pulse{50%{opacity:.3}}
+
+/* messages */
+.scroll{overflow-y:auto;overscroll-behavior:contain;padding:20px 16px 12px;scroll-behavior:smooth}
+.thread{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:18px}
+.exbanner{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;border:1px dashed var(--stamp);background:var(--stamp-soft);border-radius:14px;padding:10px 14px;font-size:14px}
+.exbanner b{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--stamp)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:38px;padding:0 14px;border-radius:10px;border:1px solid var(--stamp);background:var(--stamp);color:var(--stamp-ink);font-weight:600;font-size:14px}
+.btn.ghost{background:transparent;color:var(--stamp)}
+.btn.small{height:32px;padding:0 10px;font-size:13px}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.btn svg{width:16px;height:16px}
+
+.msg{display:flex;gap:10px;min-width:0}
+.msg .av{flex:none;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-family:var(--f-display);font-size:16px;background:var(--stamp);color:var(--stamp-ink)}
+.msg .body{min-width:0;flex:1}
+.msg.you{justify-content:flex-end}
+.msg.you .bubble{background:var(--you);border-radius:16px 16px 4px 16px;padding:10px 14px;max-width:min(560px,88%);white-space:pre-wrap;overflow-wrap:anywhere}
+.msg.you .tag{font-family:var(--f-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:2px}
+.rich{overflow-wrap:anywhere}
+.rich p{margin:0 0 8px}
+.rich p:last-child{margin-bottom:0}
+.rich h4{font-size:15px;margin:10px 0 4px}
+.rich ul,.rich ol{margin:4px 0 8px;padding-left:22px}
+.rich li{margin:3px 0}
+.rich strong{font-weight:700}
+.thinking{display:inline-flex;gap:4px;align-items:center;color:var(--muted);font-size:14px}
+.thinking span{width:6px;height:6px;border-radius:50%;background:var(--stamp);animation:bob 1s infinite}
+.thinking span:nth-child(2){animation-delay:.15s}.thinking span:nth-child(3){animation-delay:.3s}
+@keyframes bob{50%{transform:translateY(-4px);opacity:.5}}
+
+.cite{display:inline-flex;align-items:center;gap:4px;vertical-align:baseline;font-family:var(--f-mono);font-size:12px;line-height:1.2;padding:2px 7px;margin:0 2px;border:1.5px solid var(--stamp);color:var(--stamp);background:transparent;border-radius:6px;letter-spacing:.02em}
+.cite svg{width:12px;height:12px}
+.cite:hover{background:var(--stamp-soft)}
+.cite.bad{border-color:var(--tape);color:var(--tape);cursor:help}
+mark.unv{background:var(--tape-soft);color:var(--tape);border-bottom:1.5px dashed var(--tape);padding:0 2px;border-radius:3px}
+
+.meta{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:10px}
+.pill{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;font-weight:500;padding:3px 9px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--muted)}
+.pill svg{width:13px;height:13px}
+.pill.ok{color:var(--leaf);border-color:color-mix(in srgb,var(--leaf) 40%,transparent);background:var(--leaf-soft)}
+.pill.warn{color:var(--amber);border-color:color-mix(in srgb,var(--amber) 40%,transparent);background:var(--amber-soft)}
+.pill.bad{color:var(--tape);border-color:color-mix(in srgb,var(--tape) 40%,transparent);background:var(--tape-soft)}
+button.pill:hover{border-color:var(--stamp);color:var(--stamp)}
+.raw{margin-top:8px;font-family:var(--f-mono);font-size:12px;white-space:pre-wrap;overflow-wrap:anywhere;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px;max-height:320px;overflow:auto}
+.flaglist{margin:8px 0 0;padding:10px 12px;border-radius:10px;background:var(--tape-soft);font-size:13.5px}
+.flaglist li{margin:2px 0}
+
+.alert{border-radius:14px;padding:12px 14px;display:grid;grid-template-columns:auto 1fr;gap:4px 12px;align-items:start}
+.alert svg{width:22px;height:22px;margin-top:2px}
+.alert h5{margin:0;font-size:15px}
+.alert p{margin:0;font-size:14px}
+.alert.lawyer{background:var(--tape-soft);color:var(--ink);border:1px solid color-mix(in srgb,var(--tape) 45%,transparent)}
+.alert.lawyer svg,.alert.lawyer h5{color:var(--tape)}
+.alert.safe{background:var(--leaf-soft);border:1px solid color-mix(in srgb,var(--leaf) 45%,transparent)}
+.alert.safe svg,.alert.safe h5{color:var(--leaf)}
+.nums{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;grid-column:2}
+.num{display:inline-flex;align-items:center;gap:6px;font-family:var(--f-mono);font-size:13px;padding:3px 8px;border-radius:8px;border:1px solid var(--line);background:var(--surface);user-select:all}
+.num b{font-family:var(--f-body);font-weight:600;user-select:none}
+
+.followups{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.chip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:5px 12px;font-size:14px;text-align:left}
+.chip:hover{border-color:var(--stamp);color:var(--stamp)}
+
+/* draft paper */
+.paper{background:var(--paper);border:1px solid var(--paper-line);border-radius:6px 6px 14px 14px;box-shadow:var(--shadow);overflow:hidden}
+.paper header{display:flex;align-items:center;gap:10px;justify-content:space-between;flex-wrap:wrap;padding:10px 14px;border-bottom:1px solid var(--paper-line)}
+.paper header strong{font-family:var(--f-display);font-weight:400;font-size:18px}
+.docbody{padding:18px 20px 22px;font-family:var(--f-body);font-size:15px;white-space:pre-wrap;overflow-wrap:anywhere;min-height:120px;outline:none;
+  background-image:linear-gradient(to right,transparent 46px,color-mix(in srgb,var(--tape) 30%,transparent) 46px,color-mix(in srgb,var(--tape) 30%,transparent) 47px,transparent 47px);padding-left:62px}
+.docbody:focus{box-shadow:inset 0 0 0 2px var(--stamp-soft)}
+.paper footer{padding:10px 14px;border-top:1px solid var(--paper-line);display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.blanks{font-size:13px;color:var(--amber)}
+
+/* practice */
+.msg.opp .av{background:var(--tape);font-size:13px;font-family:var(--f-mono)}
+.oppname{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--tape);margin-bottom:2px}
+.coach{margin-top:8px;border-left:3px solid var(--leaf);background:var(--leaf-soft);border-radius:0 10px 10px 0;padding:8px 12px;font-size:14px}
+.coach .score{display:inline-flex;gap:3px;vertical-align:middle;margin-left:6px}
+.coach .score i{width:14px;height:6px;border-radius:2px;background:color-mix(in srgb,var(--leaf) 25%,transparent)}
+.coach .score i.on{background:var(--leaf)}
+.coach .try{display:block;margin-top:4px}
+
+/* composer */
+.composer{border-top:1px solid var(--line);padding:10px 16px 12px;background:var(--surface)}
+.composer-in{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:8px}
+.modes{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:10px;padding:2px;background:var(--bg)}
+.seg button{border:0;background:transparent;border-radius:8px;padding:4px 12px;font-size:14px;font-weight:600;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--surface);color:var(--stamp);box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.modeopts{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.modeopts select{height:32px;border-radius:8px;border:1px solid var(--line);background:var(--surface);font-size:13.5px;padding:0 6px;max-width:220px}
+.starters{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
+.starters .chip{flex:none;font-size:13.5px}
+.inputrow{display:flex;gap:8px;align-items:flex-end}
+.inputbox{flex:1;min-width:0;display:flex;align-items:flex-end;border:1.5px solid var(--line);border-radius:14px;background:var(--surface);padding:4px 4px 4px 12px}
+.inputbox:focus-within{border-color:var(--stamp)}
+.inputbox textarea{flex:1;min-width:0;border:0;outline:0;background:transparent;resize:none;max-height:160px;padding:8px 0;line-height:1.45}
+.mic{flex:none;width:40px;height:40px;border-radius:12px;border:0;background:transparent;color:var(--muted);display:grid;place-items:center}
+.mic:hover{color:var(--stamp)}
+.mic.on{background:var(--tape);color:#fff;animation:ring 1.2s infinite}
+@keyframes ring{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--tape) 50%,transparent)}100%{box-shadow:0 0 0 10px transparent}}
+.mic svg{width:22px;height:22px}
+.send{flex:none;height:48px;min-width:48px;border-radius:14px;border:0;background:var(--stamp);color:var(--stamp-ink);display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:0 14px;font-weight:600}
+.send svg{width:20px;height:20px}
+.send.stop{background:var(--tape);color:#fff}
+.hint{font-size:12px;color:var(--muted);text-align:center}
+
+/* case folder */
+.folder{min-width:0;background:var(--khaki);color:var(--khaki-ink);border-radius:20px;border:1px solid var(--khaki-deep);display:flex;flex-direction:column;overflow:hidden;position:relative}
+.folder::before{content:"";position:absolute;left:28px;top:0;bottom:0;width:10px;background:var(--tape);opacity:.85}
+.folder-head{padding:16px 18px 12px 52px;display:flex;gap:10px;align-items:flex-start;justify-content:space-between;border-bottom:1px dashed color-mix(in srgb,var(--khaki-ink) 30%,transparent)}
+.folder-head .no{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;opacity:.75}
+.folder-head h2{font-family:var(--f-display);font-weight:400;font-size:24px;line-height:1.15;margin:2px 0 0;text-wrap:balance}
+.folder-body{min-height:0;flex:1;overflow-y:auto;padding:12px 18px 18px 52px;display:flex;flex-direction:column;gap:16px}
+.stampmark{display:inline-block;font-family:var(--f-mono);font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--stamp);border:2px solid var(--stamp);border-radius:6px;padding:2px 8px;transform:rotate(-3deg);background:color-mix(in srgb,var(--surface) 40%,transparent)}
+.fsec h3{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;margin:0 0 6px;opacity:.8;font-weight:500}
+.facts{display:grid;grid-template-columns:auto 1fr;gap:3px 12px;font-size:14px}
+.facts dt{opacity:.7}.facts dd{margin:0;font-weight:600;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.tl{list-style:none;margin:0;padding:0;border-left:2px solid color-mix(in srgb,var(--khaki-ink) 30%,transparent)}
+.tl li{position:relative;padding:0 0 10px 14px;font-size:14px}
+.tl li::before{content:"";position:absolute;left:-6px;top:7px;width:10px;height:10px;border-radius:50%;background:var(--khaki);border:2px solid var(--khaki-ink)}
+.tl .d{font-family:var(--f-mono);font-size:12px;opacity:.8;display:block;font-variant-numeric:tabular-nums}
+.ev{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
+.ev button{width:100%;display:grid;grid-template-columns:20px 1fr auto;gap:8px;align-items:start;text-align:left;border:0;background:color-mix(in srgb,var(--surface) 45%,transparent);border-radius:8px;padding:6px 8px;font-size:14px;color:var(--khaki-ink)}
+.ev svg{width:18px;height:18px;margin-top:2px}
+.ev .have svg{color:var(--leaf)} .ev .need svg{color:var(--amber)}
+.ev small{display:block;opacity:.75;font-size:12.5px}
+.ev .st{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;opacity:.8;padding-top:3px}
+.dl{display:flex;flex-direction:column;gap:6px}
+.dlrow{display:grid;grid-template-columns:1fr auto;gap:2px 10px;background:color-mix(in srgb,var(--surface) 45%,transparent);border-radius:8px;padding:8px 10px;font-size:14px}
+.dlrow .when{font-family:var(--f-mono);font-size:13px;font-variant-numeric:tabular-nums;text-align:right}
+.dlrow .left{grid-column:1/-1;font-size:12.5px;opacity:.85}
+.dlrow.late{outline:2px solid var(--tape)} .dlrow.late .when{color:var(--tape)}
+.dlrow.soon .when{color:var(--amber)}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{background:color-mix(in srgb,var(--surface) 55%,transparent);border-radius:10px;padding:10px 12px;font-size:14px}
+.opt b{display:block;font-size:15px}
+.opt .row{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:12.5px;opacity:.85;margin-top:2px}
+.opt .cites{margin-top:4px}
+.folder .cite{border-color:var(--khaki-ink);color:var(--khaki-ink)}
+.qs{display:flex;flex-direction:column;gap:4px;padding:0;margin:0;list-style:none}
+.qs button{border:1px dashed color-mix(in srgb,var(--khaki-ink) 45%,transparent);background:transparent;border-radius:8px;padding:6px 10px;text-align:left;font-size:14px;color:var(--khaki-ink);width:100%}
+.qs button:hover{border-style:solid}
+.factions{display:flex;flex-wrap:wrap;gap:6px}
+.factions .btn{background:var(--khaki-ink);border-color:var(--khaki-ink);color:var(--khaki)}
+.factions .btn.ghost{background:transparent;color:var(--khaki-ink)}
+.empty{font-size:14px;opacity:.75;font-style:italic}
+.conf{font-family:var(--f-mono);font-size:11px;opacity:.75}
+
+/* docked vs slide-over */
+.folderwrap{display:none}
+@media (min-width:1180px){.folderwrap{display:flex;min-height:0}.folderwrap .folder{flex:1}.folder .closef{display:none}}
+.overlay{position:fixed;inset:0;background:rgba(10,8,25,.45);z-index:40;display:flex;justify-content:flex-end;padding:calc(env(safe-area-inset-top,0px) + 12px) max(12px,env(safe-area-inset-right,0px)) calc(env(safe-area-inset-bottom,0px) + 12px) max(12px,env(safe-area-inset-left,0px))}
+.overlay .folder{width:min(440px,100%);height:100%}
+.closef{border:0;background:transparent;color:inherit;width:36px;height:36px;border-radius:10px;display:grid;place-items:center;flex:none}
+.closef svg{width:20px;height:20px}
+
+/* modal sheet */
+.sheet{position:fixed;inset:0;z-index:50;background:rgba(10,8,25,.5);display:grid;place-items:center;padding:calc(env(safe-area-inset-top,0px) + 12px) max(12px,env(safe-area-inset-right,0px)) calc(env(safe-area-inset-bottom,0px) + 12px) max(12px,env(safe-area-inset-left,0px))}
+.sheet .card{width:min(860px,100%);max-height:100%;display:grid;grid-template-rows:auto auto minmax(0,1fr);background:var(--surface);border-radius:18px;border:1px solid var(--line);box-shadow:var(--shadow);overflow:hidden}
+.sheet .card.small{width:min(480px,100%)}
+.sheet .shead{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 16px 8px}
+.sheet .shead h2{font-family:var(--f-display);font-weight:400;font-size:24px;margin:0}
+.tabs{display:flex;gap:4px;padding:0 12px;border-bottom:1px solid var(--line);overflow-x:auto}
+.tabs button{border:0;background:transparent;padding:10px 10px;font-weight:600;font-size:14px;color:var(--muted);border-bottom:2px solid transparent;white-space:nowrap}
+.tabs button[aria-selected="true"]{color:var(--stamp);border-bottom-color:var(--stamp)}
+.spane{overflow-y:auto;padding:16px}
+.spane p{margin:0 0 10px;max-width:68ch}
+.libsearch{width:100%;height:40px;border:1px solid var(--line);border-radius:10px;background:var(--bg);padding:0 12px;margin-bottom:12px}
+.libgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+.libcard{border:1px solid var(--line);border-radius:12px;padding:12px;font-size:14px;display:flex;flex-direction:column;gap:4px}
+.libcard .id{font-family:var(--f-mono);font-size:11px;color:var(--stamp);letter-spacing:.04em}
+.libcard b{font-size:15px}
+.libcard .citef{font-size:12.5px;color:var(--muted)}
+.libcard.hl{outline:2px solid var(--stamp)}
+.grp{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+
+.tests{display:flex;flex-direction:column;gap:10px}
+.tbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px}
+.tsum{font-family:var(--f-mono);font-size:12.5px;color:var(--muted);margin-left:auto}
+.tcase{border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.tcase summary{list-style:none;display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;padding:10px 12px;cursor:pointer}
+.tcase summary::-webkit-details-marker{display:none}
+.tid{font-family:var(--f-mono);font-size:12px;color:var(--stamp)}
+.tstat{font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.tstat.pass{color:var(--leaf);background:var(--leaf-soft);border-color:transparent}
+.tstat.fail{color:var(--tape);background:var(--tape-soft);border-color:transparent}
+.tstat.run{color:var(--stamp);background:var(--stamp-soft);border-color:transparent}
+.tin{padding:0 12px 12px;display:flex;flex-direction:column;gap:8px;font-size:14px}
+.tin q{display:block;background:var(--bg);border-radius:8px;padding:8px 10px;quotes:none;white-space:pre-wrap;overflow-wrap:anywhere}
+.checks{display:flex;flex-wrap:wrap;gap:6px}
+.howgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px;margin:8px 0 14px}
+.how{border:1px solid var(--line);border-radius:12px;padding:12px;font-size:14px}
+.how .n{font-family:var(--f-mono);font-size:11px;color:var(--stamp);letter-spacing:.08em}
+.how b{display:block;margin:2px 0 4px;font-size:15px}
+.field{display:flex;flex-direction:column;gap:4px;margin-bottom:10px;font-size:14px}
+.alert.connect{background:var(--amber-soft);border:1px solid color-mix(in srgb,var(--amber) 45%,transparent)}
+.alert.connect svg,.alert.connect h5{color:var(--amber)}
+.steps{margin:0 0 12px;padding-left:22px;font-size:14px}
+.steps li{margin:3px 0}
+.field select{height:40px;border:1px solid var(--line);border-radius:10px;background:var(--bg);padding:0 8px}
+.field input{height:40px;border:1px solid var(--line);border-radius:10px;background:var(--bg);padding:0 10px}
+.copyarea{width:100%;min-height:240px;font-family:var(--f-mono);font-size:12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);padding:10px}
+
+/* voice chat */
+.voice{position:fixed;inset:0;z-index:60;background:color-mix(in srgb,var(--bg) 96%,transparent);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;text-align:center;padding:calc(env(safe-area-inset-top,0px) + 20px) max(20px,env(safe-area-inset-right,0px)) calc(env(safe-area-inset-bottom,0px) + 20px) max(20px,env(safe-area-inset-left,0px))}
+.orb{width:168px;height:168px;border-radius:50%;border:0;background:radial-gradient(circle at 35% 30%,color-mix(in srgb,var(--stamp) 55%,#fff),var(--stamp));color:var(--stamp-ink);display:grid;place-items:center;box-shadow:0 0 0 0 color-mix(in srgb,var(--stamp) 40%,transparent)}
+.orb svg{width:56px;height:56px}
+.voice[data-state="listening"] .orb{background:radial-gradient(circle at 35% 30%,color-mix(in srgb,var(--tape) 55%,#fff),var(--tape));animation:ring 1.2s infinite}
+.voice[data-state="speaking"] .orb{animation:breathe 1.6s ease-in-out infinite}
+.voice[data-state="thinking"] .orb{opacity:.7;animation:pulse 1.2s infinite}
+@keyframes breathe{50%{transform:scale(1.06)}}
+.vstate{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.vtext{max-width:600px;font-size:18px;min-height:3em;overflow-wrap:anywhere}
+.vtitle{font-family:var(--f-display);font-size:30px;margin:0}
+.toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 24px);transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:8px 14px;border-radius:10px;font-size:14px;z-index:70;max-width:calc(100% - 32px)}
+</style>
+
+<div class="layout">
+  <section class="chatcol" aria-label="Conversation">
+    <header class="top">
+      <div class="brand">
+        <h1>Haqdaar</h1><span class="dev" lang="hi">हक़दार</span>
+        <small>Free legal help for everyday problems in India</small>
+      </div>
+      <div class="tools">
+        <span class="engine" id="engine" data-mode="detecting" title="Which AI is answering"><i></i><span id="engineLbl">Connecting</span></span>
+        <label class="sr" for="lang" hidden>Language</label>
+        <select id="lang" class="langsel" aria-label="Reply language"></select>
+        <button class="iconbtn" id="ttsBtn" aria-pressed="false" title="Read replies aloud"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg><span class="lbl">Read aloud</span></button>
+        <button class="iconbtn" id="voiceBtn" title="Talk by voice"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14v-2a9 9 0 0 1 18 0v2"/><rect x="2" y="14" width="5" height="7" rx="2"/><rect x="17" y="14" width="5" height="7" rx="2"/></svg><span class="lbl">Voice chat</span></button>
+        <button class="iconbtn casebtn-wide" id="caseBtn" title="Open case file"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><span class="lbl">Case file</span><span class="badge" id="caseBadge" hidden></span></button>
+        <button class="iconbtn" id="menuBtn" title="Laws, test cases and settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg><span class="lbl">More</span></button>
+      </div>
+    </header>
+
+    <div class="scroll" id="scroll"><div class="thread" id="thread"></div></div>
+
+    <div class="composer">
+      <div class="composer-in">
+        <div class="modes">
+          <div class="seg" role="group" aria-label="Mode">
+            <button type="button" data-mode="ask" aria-pressed="true">Ask</button>
+            <button type="button" data-mode="draft" aria-pressed="false">Draft</button>
+            <button type="button" data-mode="practice" aria-pressed="false">Practice</button>
+          </div>
+          <div class="modeopts" id="modeopts"></div>
+        </div>
+        <div class="starters" id="starters"></div>
+        <div class="inputrow">
+          <div class="inputbox">
+            <textarea id="input" rows="1" placeholder="Tell me what happened, in your own words…" aria-label="Your message"></textarea>
+            <button class="mic" id="micBtn" type="button" title="Speak instead of typing" aria-label="Speak"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></button>
+          </div>
+          <button class="send" id="sendBtn" type="button" aria-label="Send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span id="sendLbl"></span></button>
+        </div>
+        <div class="hint">Haqdaar gives legal information, not legal advice. It tells you when you need a real lawyer.</div>
+      </div>
+    </div>
+  </section>
+
+  <aside class="folderwrap" id="folderDock" aria-label="Case file"></aside>
+</div>
+
+<div class="overlay" id="folderOverlay" hidden></div>
+<div class="sheet" id="sheet" hidden></div>
+<div class="voice" id="voice" hidden data-state="idle">
+  <p class="vtitle">Speak to Haqdaar</p>
+  <div class="vstate" id="vstate">Tap to talk</div>
+  <button class="orb" id="orb" aria-label="Tap to talk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></button>
+  <div class="vtext" id="vtext"></div>
+  <button class="btn ghost" id="vclose">End voice chat</button>
+</div>
+<div class="toast" id="toast" hidden></div>
+
+<script type="module">
+import {fmtD, inr, TODAY, LIB, LIBMAP, CATS, LANGS, detectLang, validate, CRISIS, clientEscalation, computeDeadlines, emptyCase, cleanTurns, buildAskSystem, DOCS, buildDraftSystem, buildPracticeSystem, offlineAnswer, OFF_PRACTICE, offlineCoach, visiblePart, normalizeCase, parseAnswer, expandCites, offlineDraft, parseCoach, runChecks} from './core.js';
+'use strict';
+/* =========================================================
+   Haqdaar — AI legal help for India
+   ========================================================= */
+const $ = (s, r = document) => r.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const LS = {
+  get(k, d) { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch { return d; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} },
+  del(k) { try { localStorage.removeItem(k); } catch {} }
+};
+const ICON = {
+  check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>',
+  circle: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/></svg>',
+  done: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg>',
+  warn: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2 20h20z"/><path d="M12 10v4M12 17h.01"/></svg>',
+  scale: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M7 21h10M5 7h14M5 7l-3 7a4 4 0 0 0 6 0zM19 7l-3 7a4 4 0 0 0 6 0z"/></svg>',
+  heart: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l8.8 8.8 8.8-8.8a5.5 5.5 0 0 0 0-7.8z"/></svg>',
+  speaker: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>',
+  code: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 6-6 6 6 6M16 6l6 6-6 6"/></svg>',
+  x: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>',
+  send: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
+  stop: '<svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="6" width="12" height="12" rx="2"/></svg>',
+  doc: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg>',
+  spar: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>'
+};
+
+
+
+
+
+
+/* =========================================================
+   STATE
+   ========================================================= */
+function exampleState() {
+  const c = {
+    no:'HQ/2026/0412', category:'deposit', title:'Security deposit withheld by landlord', place:'Kothrud, Pune, Maharashtra', amount:60000,
+    summary:'Tenant vacated on 31 Aug 2026. Landlord wants to keep ₹45,000 of the ₹60,000 deposit for painting and “damages” the tenant says did not happen.',
+    parties:{you:'Ankit', other:'Mr. Deshmukh', other_role:'landlord'},
+    events:[
+      {date:'', when:'Sept 2024', what:'Rented the flat; paid ₹60,000 deposit by bank transfer'},
+      {date:'2026-08-31', when:'31 Aug 2026', what:'Vacated and handed over keys'},
+      {date:'2026-09-10', when:'10 Sept 2026', what:'Landlord said on WhatsApp he will keep ₹45,000 for painting and damage'},
+      {date:'', when:'Since then', what:'No refund for over two months'}
+    ],
+    evidence:[
+      {item:'Bank transfer record of the deposit', status:'have', why:'Proves you paid ₹60,000'},
+      {item:'Photos and video on the day you left', status:'have', why:'Shows the flat’s condition'},
+      {item:'WhatsApp chat with landlord', status:'have', why:'His deduction claim in writing'},
+      {item:'Signed rent agreement', status:'need', why:'Deposit and painting clauses'},
+      {item:'Proof of key handover', status:'need', why:'Fixes the date you vacated'}
+    ],
+    key_dates:{cause_of_action:'2026-09-10'},
+    options:[
+      {name:'Written demand, then legal notice', forum:'Directly to the landlord', cost:'₹0 to ₹2,000', time:'1–3 weeks', ids:['ICA-73']},
+      {name:'Settle at Lok Adalat', forum:'District Legal Services Authority, Pune', cost:'Free', time:'1–3 months', ids:['LSA-LOK']},
+      {name:'Civil suit for recovery', forum:'Civil court, Pune', cost:'Court fee + lawyer', time:'1–3 years', ids:['ICA-73','LIM-ART55','CPC-O37']}
+    ],
+    missing_info:['Do you have a signed rent agreement, and what does it say about painting?','Did you get anything in writing when you returned the keys?'],
+    escalate:{needed:false, reason:''}, confidence:'medium', next_step:'Send a written 7-day demand with your move-out photos.'
+  };
+  const u = 'I vacated my rented flat in Kothrud, Pune on 31 August 2026. I had paid ₹60,000 security deposit to my landlord Mr. Deshmukh when I moved in Sept 2024. On 10 Sept he messaged on WhatsApp that he will keep ₹45,000 for painting and “damages”, but there was no damage. I have photos from the day I left. It’s been over 2 months. What can I do?';
+  const a = `You moved out on 31 Aug 2026, you paid a ₹60,000 deposit, and Mr. Deshmukh wants to keep ₹45,000 for painting and damage you say did not happen. This is a common dispute, and your position is reasonably strong.
+
+**Where you stand**
+- The deposit is your money, held only as security. Keeping it without proof of damage breaks your rent agreement, and you can claim compensation for that [[ICA-73]].
+- Ordinary wear and tear, like old paint, is usually not “damage”. Your rent agreement’s wording on painting matters, so we need to check it.
+
+**What you can do**
+1. Send him a written demand today, on WhatsApp and email, asking for the full refund within 7 days. Attach your move-out photos.
+2. If he ignores it, send a formal legal notice with a 15-day deadline. I can draft it for you.
+3. Then try a free settlement at Lok Adalat [[LSA-LOK]], or file a recovery case in a civil court. The usual time limit is three years from his refusal [[LIM-ART55]], so there is no rush, but act while the evidence is fresh.
+
+Two questions: do you have a signed rent agreement, and does it mention painting charges?`;
+  return {case:c, msgs:[{k:'user', text:u, mode:'ask', ex:true}, {k:'ai', text:a, raw:a, val:validate(a), ex:true}], turns:[{role:'user', content:u}, {role:'assistant', content:a}], example:true};
+}
+
+const saved = LS.get('hq.state', null);
+const S = Object.assign({lang:'auto', tts:false, mode:'ask', draftType:'legal_notice', oppRole:'', tone:'stubborn', prac:{on:false, turns:[]}, tests:{}},
+  saved && saved.v === 3 ? saved : exampleState());
+if (!S.msgs) Object.assign(S, exampleState());
+S.msgs.forEach(m => { if (m.streaming) { m.streaming = false; m.err = m.err || 'This answer was interrupted.'; } });
+S.tests = LS.get('hq.tests', {});
+function save() { LS.set('hq.state', {v:3, lang:S.lang, tts:S.tts, case:S.case, msgs:S.msgs.slice(-80), turns:S.turns.slice(-40), example:S.example, draftType:S.draftType, oppRole:S.oppRole, tone:S.tone}); }
+
+/* =========================================================
+   AI ENGINE: serverless /api/chat → offline basic guide
+   ========================================================= */
+const ENG = {mode:'detecting', model:'', ready:null};
+
+function setEngine(m, modelName) {
+  ENG.mode = m;
+  if (modelName) ENG.model = modelName;
+  const el = $('#engine');
+  if (el) el.dataset.mode = m;
+  const lbl = $('#engineLbl');
+  if (lbl) {
+    if (m === 'api') lbl.textContent = ENG.model || 'AI connected';
+    else if (m === 'offline') lbl.textContent = 'AI unavailable — basic guide';
+    else lbl.textContent = 'Connecting…';
+  }
+}
+
+async function initEngine() {
+  setEngine('detecting');
+  try {
+    const t = await llm('You are a connection test. Reply with "Connected".', [{role:'user', content:'ping'}], {tier:'quick'});
+    if (t) setEngine('api');
+  } catch (e) {
+    setEngine('offline');
+  }
+  renderThread(false);
+}
+
+async function llm(system, turns, opts = {}) {
+  turns = cleanTurns(turns);
+  let res;
+  try {
+    res = await fetch('/api/chat', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ system, messages: turns, tier: opts.tier || 'default' }),
+      signal: opts.signal
+    });
+  } catch (e) {
+    throw { code: 'network_error', message: 'Could not reach server endpoint.' };
+  }
+  if (!res.ok) {
+    let j;
+    try { j = await res.json(); } catch {}
+    const err = (j && j.error) || { code: 'upstream_error', message: `Server error (HTTP ${res.status})` };
+    throw err;
+  }
+  const data = await res.json();
+  if (data.model) setEngine('api', data.model);
+  return data.text;
+}
+
+function errCopy(e) {
+  const c = e && e.code;
+  if (c === 'cancelled') return 'Stopped.';
+  if (c === 'missing_config') return 'AI is not configured on the server. Showing basic offline guide.';
+  if (c === 'model_not_found') return (e.message || 'Model not found.') + ' Showing basic offline guide.';
+  if (c === 'rate_limited') return 'The AI service is busy (rate limit). Wait a moment and try again.';
+  if (c === 'upstream_error') return (e.message || 'AI service error.') + ' Showing basic offline guide.';
+  return (e.message || 'AI service unavailable.') + ' Showing basic offline guide.';
+}
+
+function maybeDowngrade(e) {
+  if (e && (e.code === 'missing_config' || e.code === 'model_not_found' || e.code === 'upstream_error' || e.code === 'network_error')) {
+    setEngine('offline');
+    renderThread(false);
+  }
+}
+
+
+
+/* =========================================================
+   RENDERING
+   ========================================================= */
+const thread = $('#thread');
+function rich(src, val) {
+  let t = esc(src);
+  if (val) for (const f of val.flags) if (f.level === 'bad') { const e = esc(f.text); t = t.split(e).join(`<mark class="unv" title="${esc(f.note)}">${e}</mark>`); }
+  t = t.replace(/\[\[([A-Za-z0-9-]+)\]\]/g, (m, id) => { const L = LIBMAP[id]; return L ? `<button type="button" class="cite" data-id="${id}" title="${esc(L.t)}">${ICON.check}${esc(L.short)}</button>` : `<span class="cite bad" title="This citation is not in the verified library and was blocked.">unverified law</span>`; });
+  t = t.replace(/\*\*([^*\n]+)\*\*/g, '<strong>$1</strong>');
+  t = t.replace(/\bhttps?:\/\/[^\s<)]+/g, u => `<a href="${u}" target="_blank" rel="noopener">${u}</a>`);
+  let html = '', list = null;
+  const close = () => { if (list) { html += `</${list}>`; list = null; } };
+  for (const raw of t.split('\n')) {
+    const l = raw.trim(); let m;
+    if (!l) { close(); continue; }
+    if ((m = l.match(/^#{1,4}\s+(.*)/))) { close(); html += `<h4>${m[1]}</h4>`; continue; }
+    if ((m = l.match(/^[-*•]\s+(.*)/))) { if (list !== 'ul') { close(); html += '<ul>'; list = 'ul'; } html += `<li>${m[1]}</li>`; continue; }
+    if ((m = l.match(/^(\d+)[.)]\s+(.*)/))) { if (list !== 'ol') { close(); html += '<ol>'; list = 'ol'; } html += `<li>${m[2]}</li>`; continue; }
+    close(); html += `<p>${l}</p>`;
+  }
+  close();
+  return html;
+}
+
+function lawyerCard(reasons) {
+  return `<div class="alert lawyer">${ICON.scale}<div><h5>Talk to a real lawyer about this</h5>${reasons.map(r => `<p>${esc(r)}</p>`).join('')}</div>
+  <div class="nums"><span class="num"><b>Free legal aid</b>15100</span><span class="num"><b>Emergency</b>112</span><a class="num" href="https://www.tele-law.in/" target="_blank" rel="noopener"><b>Tele-Law</b>tele-law.in</a></div></div>`;
+}
+function safetyCard() {
+  return `<div class="alert safe">${ICON.heart}<div><h5>You matter, and you don’t have to face this alone</h5><p>If you are thinking of harming yourself, please talk to someone now. Tele-MANAS is free, confidential, 24×7, in your language. If you are in immediate danger, call 112.</p></div>
+  <div class="nums"><span class="num"><b>Tele-MANAS</b>14416</span><span class="num"><b>Emergency</b>112</span></div></div>`;
+}
+function metaRow(m, i) {
+  const v = m.val; if (!v) return '';
+  const bad = v.flags.filter(f => f.level === 'bad').length + v.unknown.length;
+  const warn = v.flags.filter(f => f.level === 'warn').length;
+  let h = '<div class="meta">';
+  h += v.verified.length ? `<span class="pill ok">${ICON.check}${v.verified.length} verified law${v.verified.length > 1 ? 's' : ''}</span>` : `<span class="pill">${ICON.check}No laws cited</span>`;
+  if (bad) h += `<button type="button" class="pill bad" data-act="flags" data-i="${i}">${ICON.warn}${bad} unverified</button>`;
+  if (warn) h += `<button type="button" class="pill warn" data-act="flags" data-i="${i}">${ICON.warn}${warn} note${warn > 1 ? 's' : ''}</button>`;
+  if (m.k === 'ai') h += `<button type="button" class="pill" data-act="speak" data-i="${i}">${ICON.speaker}Listen</button>`;
+  h += `<button type="button" class="pill" data-act="raw" data-i="${i}">${ICON.code}Raw output</button>`;
+  h += '</div>';
+  if (m.showFlags && (bad || warn)) h += `<ul class="flaglist">${v.unknown.map(u => `<li><b>[[${esc(u)}]]</b> — not in the verified library; blocked.</li>`).join('')}${v.flags.map(f => `<li><b>${esc(f.text)}</b> — ${esc(f.note)}</li>`).join('')}</ul>`;
+  if (m.showRaw) h += `<div class="raw">${esc(m.raw || m.text)}</div>`;
+  return h;
+}
+function msgHTML(m, i) {
+  if (m.k === 'user') return `<div class="msg you"><div class="bubble">${m.mode && m.mode !== 'ask' ? `<span class="tag">${m.mode === 'practice' ? 'You · practice' : 'Draft request'}</span>` : ''}${esc(m.text)}</div></div>`;
+  if (m.k === 'safety') return safetyCard();
+  if (m.k === 'note') return `<div class="exbanner"><span>${m.html}</span></div>`;
+  if (m.k === 'ai') {
+    let inner = m.streaming && !m.text ? `<span class="thinking"><span></span><span></span><span></span>&nbsp;Reading your case…</span>` : `<div class="rich">${rich(m.text, m.streaming ? null : m.val)}</div>`;
+    if (m.err) inner += `<p class="pill bad" style="margin-top:8px">${esc(m.err)}</p>`;
+    if (m.offline && !m.streaming) inner += `<p style="margin-top:8px"><button type="button" class="pill warn" data-act="connect">${ICON.warn}Basic guide — connect AI for a full answer</button></p>`;
+    const esc8 = m.lawyer && m.lawyer.length ? lawyerCard(m.lawyer) : '';
+    const fu = !m.streaming && m.followups && m.followups.length && i === S.msgs.length - 1 ? `<div class="followups">${m.followups.map(q => `<button type="button" class="chip" data-act="answer" data-q="${esc(q)}">${esc(q)}</button>`).join('')}</div>` : '';
+    return `<div class="msg"><div class="av" aria-hidden="true">ह</div><div class="body">${esc8 ? esc8 + '<div style="height:10px"></div>' : ''}${inner}${m.streaming ? '' : metaRow(m, i)}${fu}</div></div>`;
+  }
+  if (m.k === 'draft') {
+    const body = m.streaming ? `<div class="docbody"><span class="thinking"><span></span><span></span><span></span>&nbsp;Drafting…</span></div>` : `<div class="docbody" contenteditable="true" spellcheck="true" data-i="${i}">${esc(m.doc)}</div>`;
+    const blanks = m.doc ? [...new Set((m.doc.match(/\[[A-Z0-9 ,'’/&().-]{3,}\]/g) || []))] : [];
+    return `<div class="paper"><header><strong>${esc(DOCS[m.type]?.label || 'Draft')}</strong><span class="pill">${ICON.doc}Editable — click to change any line</span></header>${body}
+    ${m.streaming ? '' : `<footer><button type="button" class="btn small" data-act="copy" data-i="${i}">Copy</button><button type="button" class="btn small ghost" data-act="savedoc" data-i="${i}">Save as .txt</button>${blanks.length ? `<span class="blanks">${blanks.length} blank${blanks.length > 1 ? 's' : ''} to fill: ${esc(blanks.slice(0, 4).join(' '))}${blanks.length > 4 ? '…' : ''}</span>` : ''}</footer>`}
+    <div style="padding:0 14px 12px">${m.err ? `<p class="pill bad">${esc(m.err)}</p>` : ''}${m.streaming ? '' : metaRow(m, i)}</div></div>`;
+  }
+  if (m.k === 'opp') {
+    const c = m.coach;
+    const coach = c && c.score ? `<div class="coach"><b>Coach</b><span class="score" aria-label="Strength ${c.score} of 5">${[1,2,3,4,5].map(n => `<i class="${n <= c.score ? 'on' : ''}"></i>`).join('')}</span><div>${rich(c.worked || '')}</div><div><b>Improve:</b> ${esc(c.improve || '')}</div>${c.try_saying ? `<span class="try"><b>Try:</b> “${esc(c.try_saying)}”</span>` : ''}</div>` : '';
+    return `<div class="msg opp"><div class="av" aria-hidden="true">VS</div><div class="body"><div class="oppname">${esc(m.role)}</div>${m.streaming && !m.text ? '<span class="thinking"><span></span><span></span><span></span></span>' : `<div class="rich">${rich(m.text)}</div>`}${m.err ? `<p class="pill bad">${esc(m.err)}</p>` : ''}</div></div>${coach}`;
+  }
+  return '';
+}
+function renderThread(scroll = true) {
+  let h = '';
+  if (ENG.mode === 'offline') h += `<div class="alert connect">${ICON.warn}<div><h5>AI is not connected, so answers come from a basic built-in guide</h5><p>For real legal suggestions on any problem, in your language, connect an AI. A free Google Gemini key takes about two minutes.</p></div><div class="nums"><button type="button" class="btn small" data-act="connect">Connect AI</button></div></div>`;
+  if (S.example) h += `<div class="exbanner"><span><b>Example case</b><br>This shows how Haqdaar works. Start your own and this disappears.</span><button type="button" class="btn small" data-act="fresh">Start my own case</button></div>`;
+  h += S.msgs.map((m, i) => `<div data-mi="${i}">${msgHTML(m, i)}</div>`).join('');
+  thread.innerHTML = h;
+  if (scroll) requestAnimationFrame(() => { const sc = $('#scroll'); sc.scrollTop = sc.scrollHeight; });
+}
+function renderOne(m) {
+  const i = S.msgs.indexOf(m); const el = thread.querySelector(`[data-mi="${i}"]`);
+  if (!el) return renderThread();
+  el.innerHTML = msgHTML(m, i);
+  const sc = $('#scroll'); if (sc.scrollHeight - sc.scrollTop - sc.clientHeight < 200) sc.scrollTop = sc.scrollHeight;
+}
+
+/* ---------- case folder ---------- */
+function caseHTML(overlay) {
+  const c = S.case; const meta = CATS[c.category] || CATS.other;
+  const filled = c.category !== 'unclassified';
+  const dls = computeDeadlines(c);
+  const esc8 = c.escalate && c.escalate.needed;
+  let h = `<div class="folder"><div class="folder-head"><div style="min-width:0"><div class="no">CASE FILE · ${esc(c.no)}${S.example ? ' · EXAMPLE' : ''}</div><h2>${esc(c.title || 'Your case file')}</h2>
+  <div style="margin-top:8px;display:flex;gap:8px;align-items:center;flex-wrap:wrap"><span class="stampmark">${esc(meta.label)}</span><span class="conf">confidence: ${esc(c.confidence || 'low')}</span></div></div>
+  ${overlay ? `<button class="closef" type="button" data-act="closefolder" aria-label="Close case file">${ICON.x}</button>` : ''}</div><div class="folder-body">`;
+  if (!filled) {
+    h += `<p class="empty">This file fills in as you talk: what happened and when, the proof you have, deadlines, and your options. Start by telling Haqdaar your problem.</p>`;
+    return h + '</div></div>';
+  }
+  if (esc8) h += `<div class="alert lawyer" style="color:var(--ink)">${ICON.scale}<div><h5>Lawyer needed</h5><p>${esc(c.escalate.reason || 'This situation needs a lawyer.')}</p></div><div class="nums"><span class="num"><b>Legal aid</b>15100</span></div></div>`;
+  h += `<div class="fsec"><h3>Key facts</h3><dl class="facts">
+    ${c.amount ? `<dt>Amount</dt><dd>${inr(c.amount)}</dd>` : ''}
+    ${c.parties?.you ? `<dt>You</dt><dd>${esc(c.parties.you)}</dd>` : ''}
+    ${c.parties?.other || c.parties?.other_role ? `<dt>Other side</dt><dd>${esc([c.parties.other, c.parties.other_role && `(${c.parties.other_role})`].filter(Boolean).join(' '))}</dd>` : ''}
+    ${c.place ? `<dt>Place</dt><dd>${esc(c.place)}</dd>` : ''}
+  </dl>${c.summary ? `<p style="margin:8px 0 0;font-size:14px">${esc(c.summary)}</p>` : ''}</div>`;
+  h += `<div class="fsec"><h3>What happened</h3>${c.events?.length ? `<ol class="tl">${c.events.map(e => `<li><span class="d">${esc(e.date ? fmtD(e.date) : (e.when || 'Date not given'))}</span>${esc(e.what)}</li>`).join('')}</ol>` : '<p class="empty">No events yet.</p>'}</div>`;
+  h += `<div class="fsec"><h3>Your proof · tap to mark</h3>${c.evidence?.length ? `<ul class="ev">${c.evidence.map((e, j) => `<li><button type="button" class="${e.status === 'have' ? 'have' : 'need'}" data-act="ev" data-j="${j}">${e.status === 'have' ? ICON.done : ICON.circle}<span>${esc(e.item)}${e.why ? `<small>${esc(e.why)}</small>` : ''}</span><span class="st">${e.status === 'have' ? 'have' : 'get it'}</span></button></li>`).join('')}</ul>` : '<p class="empty">Proof will be listed here.</p>'}</div>`;
+  h += `<div class="fsec"><h3>Deadlines · calculated, not guessed</h3>${dls.length ? `<div class="dl">${dls.map(d => { const late = d.days < 0, soon = d.days >= 0 && d.days <= 14; return `<div class="dlrow ${late ? 'late' : soon ? 'soon' : ''}"><span>${esc(d.label)} <button type="button" class="cite" data-id="${d.cite}">${ICON.check}${esc(LIBMAP[d.cite].short)}</button></span><span class="when">${fmtD(d.date)}</span><span class="left">${late ? `Passed ${-d.days} days ago. Ask a lawyer whether the delay can be excused.` : d.days === 0 ? 'Today.' : `${d.days} days left.`} ${esc(d.note || '')}</span></div>`; }).join('')}</div>` : '<p class="empty">Tell Haqdaar the key date (when it happened, when you left, when the cheque bounced) and the deadlines appear here.</p>'}</div>`;
+  h += `<div class="fsec"><h3>Your options</h3>${c.options?.length ? `<div class="opts">${c.options.map(o => `<div class="opt"><b>${esc(o.name)}</b><div class="row">${o.forum ? `<span>Where: ${esc(o.forum)}</span>` : ''}${o.cost ? `<span>Cost: ${esc(o.cost)}</span>` : ''}${o.time ? `<span>Time: ${esc(o.time)}</span>` : ''}</div>${(o.ids || []).filter(id => LIBMAP[id]).length ? `<div class="cites">${o.ids.filter(id => LIBMAP[id]).map(id => `<button type="button" class="cite" data-id="${id}">${ICON.check}${esc(LIBMAP[id].short)}</button>`).join('')}</div>` : ''}</div>`).join('')}</div>` : '<p class="empty">Options appear once the facts are clear.</p>'}</div>`;
+  if (c.missing_info?.length) h += `<div class="fsec"><h3>Still need to know</h3><ul class="qs">${c.missing_info.map(q => `<li><button type="button" data-act="answer" data-q="${esc(q)}">${esc(q)}</button></li>`).join('')}</ul></div>`;
+  if (c.next_step) h += `<div class="fsec"><h3>Next step</h3><p style="margin:0;font-weight:600">${esc(c.next_step)}</p></div>`;
+  h += `<div class="fsec"><h3>Do it now</h3><div class="factions"><button type="button" class="btn small" data-act="godraft">${ICON.doc}Draft a document</button><button type="button" class="btn small ghost" data-act="gopractice">${ICON.spar}Practise with the ${esc((meta.opp || 'other side').toLowerCase())}</button><button type="button" class="btn small ghost" data-act="savecase">Save case file</button></div></div>`;
+  return h + '</div></div>';
+}
+function renderCase() {
+  $('#folderDock').innerHTML = caseHTML(false);
+  const ov = $('#folderOverlay'); if (!ov.hidden) ov.innerHTML = caseHTML(true);
+  const c = S.case; const b = $('#caseBadge');
+  const n = (c.events?.length || 0) + (c.evidence?.length || 0);
+  b.hidden = !n || c.category === 'unclassified'; b.textContent = n;
+}
+function openFolder() { const ov = $('#folderOverlay'); ov.hidden = false; ov.innerHTML = caseHTML(true); }
+function closeFolder() { const ov = $('#folderOverlay'); ov.hidden = true; ov.innerHTML = ''; }
+
+/* =========================================================
+   COMPOSER & MODES
+   ========================================================= */
+const STARTERS = [
+  ['Landlord won’t return my deposit', 'My landlord is not returning my security deposit after I vacated.'],
+  ['Refund never came', 'I returned a product but the company has not refunded my money.'],
+  ['Salary not paid', 'My employer has not paid my salary.'],
+  ['I got a legal notice', 'I received a legal notice and I don’t understand it. Here is what it says: '],
+  ['Cheque bounced', 'A cheque someone gave me has bounced.'],
+  ['UPI / online fraud', 'Money was taken from my account through an online fraud.'],
+  ['Police won’t file FIR', 'The police are refusing to register my complaint.'],
+  ['मकान मालिक जमा राशि नहीं लौटा रहा', 'मेरा मकान मालिक मेरी सिक्योरिटी डिपॉज़िट वापस नहीं कर रहा है।']
+];
+function renderModeOpts() {
+  $$('.seg button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.mode === S.mode)));
+  const mo = $('#modeopts'); const inp = $('#input'); const st = $('#starters');
+  if (S.mode === 'ask') {
+    mo.innerHTML = '';
+    inp.placeholder = 'Tell me what happened, in your own words…';
+    st.hidden = !(S.example || S.case.category === 'unclassified');
+    st.innerHTML = STARTERS.map(([l, t]) => `<button type="button" class="chip" data-act="starter" data-t="${esc(t)}">${esc(l)}</button>`).join('');
+    $('#sendLbl').textContent = '';
+  } else if (S.mode === 'draft') {
+    st.hidden = true;
+    mo.innerHTML = `<select id="draftType" aria-label="Document">${Object.entries(DOCS).map(([k, d]) => `<option value="${k}" ${k === S.draftType ? 'selected' : ''}>${esc(d.label)}</option>`).join('')}</select>
+      <select id="draftLang" aria-label="Draft language"><option value="en">In English</option><option value="hi">In Hindi</option><option value="chat">In my chat language</option></select>`;
+    inp.placeholder = 'Optional: add names, addresses, amounts or anything to include…';
+    $('#sendLbl').textContent = 'Draft';
+  } else {
+    st.hidden = true;
+    const def = S.oppRole || (CATS[S.case.category] || CATS.other).opp;
+    const roles = [...new Set([def, 'Landlord', 'Company customer-care agent', 'HR manager', 'Person who gave the cheque', 'Bank branch manager', 'Public Information Officer', 'Consumer Commission member (hearing)'])];
+    mo.innerHTML = `<select id="oppRole" aria-label="Who to practise with">${roles.map(r => `<option ${r === def ? 'selected' : ''}>${esc(r)}</option>`).join('')}</select>
+      <select id="tone" aria-label="How difficult">${[['polite','Polite'],['stubborn','Stubborn'],['tough','Tough']].map(([v, l]) => `<option value="${v}" ${v === S.tone ? 'selected' : ''}>${l}</option>`).join('')}</select>
+      <button type="button" class="btn small ghost" data-act="pstart">${S.prac.on ? 'Restart' : 'Start practice'}</button>`;
+    inp.placeholder = S.prac.on ? 'Say your line…' : 'Press “Start practice” — the other side speaks first.';
+    $('#sendLbl').textContent = '';
+  }
+}
+let busyCtl = null;
+function setBusy(on) {
+  const b = $('#sendBtn');
+  b.classList.toggle('stop', on);
+  b.setAttribute('aria-label', on ? 'Stop' : 'Send');
+  b.innerHTML = (on ? ICON.stop : ICON.send) + `<span id="sendLbl">${on ? '' : (S.mode === 'draft' ? 'Draft' : '')}</span>`;
+}
+function autosize() { const t = $('#input'); t.style.height = 'auto'; t.style.height = Math.min(160, t.scrollHeight) + 'px'; }
+
+function startFresh(keepMode) {
+  S.case = emptyCase(); S.msgs = []; S.turns = []; S.example = false; S.prac = {on:false, turns:[]};
+  if (!keepMode) S.mode = 'ask';
+  save(); renderThread(); renderCase(); renderModeOpts();
+}
+
+function userTexts() { return S.msgs.filter(m => m.k === 'user' && (!m.mode || m.mode === 'ask')).map(m => m.text); }
+async function sendAsk(text) {
+  if (S.example) startFresh(true);
+  S.msgs.push({k:'user', text, mode:'ask'});
+  if (CRISIS.test(text)) S.msgs.push({k:'safety'});
+  S.turns.push({role:'user', content:text});
+  const m = {k:'ai', text:'', raw:'', streaming:true};
+  S.msgs.push(m); renderThread();
+  await ENG.ready;
+  let raw = '';
+  if (ENG.mode === 'offline' || ENG.mode === 'detecting') { raw = offlineAnswer(text, S.case); m.offline = true; }
+  else {
+    busyCtl = new AbortController(); setBusy(true);
+    try {
+      raw = await llm(buildAskSystem(S.lang, S.case), S.turns.slice(-14), {signal:busyCtl.signal, onText:({text}) => { m.raw = text; m.text = visiblePart(text); renderOne(m); }});
+    } catch (e) {
+      setBusy(false); maybeDowngrade(e);
+      m.err = errCopy(e);
+      if (e.code !== 'cancelled' && ENG.mode === 'offline' && !e.text) { raw = offlineAnswer(text, S.case); m.offline = true; }
+      else {
+        m.streaming = false; m.raw = e.text || m.raw || ''; m.text = visiblePart(m.raw).trim();
+        m.val = m.text ? validate(m.text) : null;
+        if (m.text) S.turns.push({role:'assistant', content:m.text}); else S.turns.pop();
+        save(); renderOne(m);
+        if (voiceOn) vset('idle', m.err);
+        return;
+      }
+    }
+    setBusy(false);
+  }
+  finishAnswer(m, raw);
+}
+function finishAnswer(m, raw) {
+  const {reply, obj} = parseAnswer(raw);
+  m.raw = raw; m.text = reply || '(empty answer)'; m.streaming = false; m.val = validate(m.text);
+  S.case = normalizeCase(obj, S.case);
+  const cl = clientEscalation(userTexts());
+  if (S.case.escalate.needed && S.case.escalate.reason && !cl.length) cl.push(S.case.escalate.reason);
+  if (cl.length && !S.case.escalate.needed) S.case.escalate = {needed:true, reason:cl[0]};
+  m.lawyer = cl;
+  m.followups = S.case.missing_info.slice(0, 2);
+  S.turns.push({role:'assistant', content:m.text});
+  save(); renderOne(m); renderCase();
+  if (voiceOn) voiceAfterReply(m.text);
+  else if (S.tts) speak(m.text);
+}
+
+/* ---------- DRAFT ---------- */
+async function sendDraft(extra) {
+  const type = $('#draftType')?.value || S.draftType; S.draftType = type;
+  const dlSel = $('#draftLang')?.value || 'en';
+  const lang = dlSel === 'chat' ? (S.lang === 'auto' ? detectLang(userTexts().join(' ')) : S.lang) : dlSel;
+  if (S.example) { S.example = false; S.msgs = S.msgs.map(x => ({...x, ex:false})); }
+  S.msgs.push({k:'user', text:`Draft: ${DOCS[type].label}${extra ? ' — ' + extra : ''}`, mode:'draft'});
+  const m = {k:'draft', type, doc:'', raw:'', streaming:true};
+  S.msgs.push(m); renderThread();
+  await ENG.ready;
+  let raw = '';
+  if (ENG.mode === 'offline' || ENG.mode === 'detecting') raw = offlineDraft(type, extra, S.case);
+  else {
+    busyCtl = new AbortController(); setBusy(true);
+    try { raw = await llm(buildDraftSystem(type, extra, S.case, lang), [{role:'user', content:'Write the document now.'}], {signal:busyCtl.signal}); }
+    catch (e) { maybeDowngrade(e); m.err = errCopy(e); raw = e.text || (ENG.mode === 'offline' ? offlineDraft(type, extra, S.case) : ''); }
+    setBusy(false);
+  }
+  m.raw = raw; m.val = validate(raw); m.doc = expandCites(raw.replace(/```[a-z]*\n?|```/g, '').trim()); m.streaming = false;
+  save(); renderOne(m);
+}
+
+/* ---------- PRACTICE ---------- */
+async function practiceTurn(userLine) {
+  const role = $('#oppRole')?.value || S.oppRole || CATS[S.case.category].opp; S.oppRole = role;
+  S.tone = $('#tone')?.value || S.tone;
+  if (S.example) { S.example = false; }
+  if (userLine) { S.msgs.push({k:'user', text:userLine, mode:'practice'}); S.prac.turns.push({role:'user', content:userLine}); }
+  const m = {k:'opp', role, text:'', streaming:true};
+  S.msgs.push(m); renderThread();
+  await ENG.ready;
+  let raw = '';
+  if (ENG.mode === 'offline' || ENG.mode === 'detecting') {
+    const pool = userLine ? OFF_PRACTICE.push : OFF_PRACTICE.open;
+    raw = pool[Math.floor(Math.random() * pool.length)] + '\n<<<COACH>>>\n' + JSON.stringify(userLine ? offlineCoach(userLine) : {score:0});
+  } else {
+    busyCtl = new AbortController(); setBusy(true);
+    try { raw = await llm(buildPracticeSystem(role, S.tone, S.case, S.lang), S.prac.turns, {signal:busyCtl.signal, tier:'quick', onText:({text}) => { m.text = text.split('<<<')[0]; renderOne(m); }}); }
+    catch (e) { maybeDowngrade(e); m.err = errCopy(e); raw = e.text || ''; }
+    setBusy(false);
+  }
+  const {text, coach} = parseCoach(raw);
+  m.text = text; m.coach = coach; m.streaming = false;
+  if (text) S.prac.turns.push({role:'assistant', content:text});
+  save(); renderOne(m);
+  if (S.tts && text) speak(text);
+}
+function startPractice() {
+  S.prac = {on:true, turns:[{role:'user', content:'(Start the practice now. Open the conversation in character, in one or two sentences.)'}]};
+  S.msgs.push({k:'note', html:`<b>Practice started</b> — the AI now plays the other side. A coach scores each of your replies. Switch back to “Ask” any time.`});
+  renderModeOpts(); practiceTurn(null);
+}
+
+/* ---------- send dispatcher ---------- */
+function onSend() {
+  if (busyCtl && $('#sendBtn').classList.contains('stop')) { busyCtl.abort(); return; }
+  const inp = $('#input'); const text = inp.value.trim();
+  stopDictation();
+  if (S.mode === 'ask') { if (!text) { inp.focus(); return; } inp.value = ''; autosize(); sendAsk(text); }
+  else if (S.mode === 'draft') { inp.value = ''; autosize(); sendDraft(text); }
+  else { if (!S.prac.on) { startPractice(); return; } if (!text) { inp.focus(); return; } inp.value = ''; autosize(); practiceTurn(text); }
+}
+
+/* =========================================================
+   VOICE — speech to text and text to speech
+   ========================================================= */
+const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+let rec = null, voiceOn = false;
+function speechLang() {
+  if (S.lang !== 'auto') return (LANGS.find(l => l.c === S.lang) || LANGS[0]).speech;
+  const d = detectLang(userTexts().slice(-2).join(' '));
+  return (LANGS.find(l => l.c === d) || LANGS[0]).speech;
+}
+function startDictation({onInterim, onFinal, onEnd, onError}) {
+  if (!SR) { onError && onError('unsupported'); return false; }
+  try {
+    rec = new SR(); rec.lang = speechLang(); rec.interimResults = true; rec.continuous = false;
+    let finalText = '';
+    rec.onresult = e => { let interim = ''; for (let i = e.resultIndex; i < e.results.length; i++) { const r = e.results[i]; if (r.isFinal) finalText += r[0].transcript; else interim += r[0].transcript; } onInterim && onInterim(finalText + interim); };
+    rec.onerror = e => { onError && onError(e.error || 'error'); };
+    rec.onend = () => { rec = null; onEnd && onEnd(); if (finalText.trim()) onFinal && onFinal(finalText.trim()); };
+    rec.start(); return true;
+  } catch (e) { onError && onError('not-allowed'); return false; }
+}
+function stopDictation() { if (rec) { try { rec.stop(); } catch {} } }
+function micToggle() {
+  const b = $('#micBtn'); const inp = $('#input');
+  if (rec) { stopDictation(); return; }
+  const base = inp.value ? inp.value.trim() + ' ' : '';
+  const ok = startDictation({
+    onInterim: t => { inp.value = base + t; autosize(); },
+    onEnd: () => b.classList.remove('on'),
+    onError: err => { b.classList.remove('on'); if (err !== 'no-speech' && err !== 'aborted') voiceHelp(err); }
+  });
+  if (ok) b.classList.add('on');
+}
+function voiceHelp(err) {
+  openSheet('Voice input', `<p>${err === 'unsupported' ? 'This browser does not support speech recognition.' : 'The microphone is blocked here, so Haqdaar cannot listen directly.'}</p>
+  <p><b>Two easy ways to still speak:</b></p>
+  <ol><li>Tap the message box and use the <b>microphone key on your phone keyboard</b>. Google’s and Apple’s keyboards understand Hindi, Tamil, Bengali, Marathi and other Indian languages.</li>
+  <li>Open this page in Chrome or Edge on a computer or Android phone, outside an app preview, and allow the microphone when asked.</li></ol>
+  <p>Replies can always be read aloud: turn on <b>Read aloud</b> at the top.</p>`, true);
+}
+function cleanForSpeech(t) { return t.replace(/\[\[([A-Za-z0-9-]+)\]\]/g, (_, id) => LIBMAP[id] ? `(${LIBMAP[id].cite})` : '').replace(/[*#•]/g, '').replace(/\n+/g, '. '); }
+function speak(text, onDone) {
+  if (!('speechSynthesis' in window)) { onDone && onDone(); return; }
+  try {
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(cleanForSpeech(text));
+    const lang = S.lang === 'auto' ? (LANGS.find(l => l.c === detectLang(text)) || LANGS[0]).speech : (LANGS.find(l => l.c === S.lang) || LANGS[0]).speech;
+    u.lang = lang;
+    const v = speechSynthesis.getVoices().find(v => v.lang && v.lang.toLowerCase().startsWith(lang.slice(0, 2).toLowerCase()));
+    if (v) u.voice = v;
+    u.rate = 0.98;
+    u.onend = () => onDone && onDone(); u.onerror = () => onDone && onDone();
+    speechSynthesis.speak(u);
+  } catch { onDone && onDone(); }
+}
+/* voice-chat overlay */
+function vset(state, text) { const v = $('#voice'); v.dataset.state = state; $('#vstate').textContent = {idle:'Tap to talk', listening:'Listening…', thinking:'Thinking…', speaking:'Speaking — tap to interrupt'}[state]; if (text != null) $('#vtext').textContent = text; }
+function openVoice() {
+  if (S.mode !== 'ask') { S.mode = 'ask'; renderModeOpts(); }
+  voiceOn = true; $('#voice').hidden = false; vset('idle', 'Describe your problem in your own language. I will reply out loud.');
+}
+function closeVoice() { voiceOn = false; stopDictation(); try { speechSynthesis.cancel(); } catch {} $('#voice').hidden = true; }
+function voiceListen() {
+  try { speechSynthesis.cancel(); } catch {}
+  const ok = startDictation({
+    onInterim: t => vset('listening', t),
+    onFinal: t => { vset('thinking', t); sendAsk(t); },
+    onEnd: () => { if ($('#voice').dataset.state === 'listening') vset('idle'); },
+    onError: err => { if (err === 'no-speech') { vset('idle', 'I didn’t hear anything. Tap and try again.'); return; } closeVoice(); voiceHelp(err); }
+  });
+  if (ok) vset('listening', '');
+}
+function voiceAfterReply(text) { vset('speaking', text.replace(/\[\[[^\]]+\]\]/g, '').replace(/[*#]/g, '').slice(0, 400)); speak(text, () => { if (voiceOn) vset('idle'); }); }
+
+/* =========================================================
+   SHEET: laws, test cases, honesty, engine
+   ========================================================= */
+function openSheet(title, inner, small) {
+  const s = $('#sheet'); s.hidden = false;
+  s.innerHTML = `<div class="card ${small ? 'small' : ''}" role="dialog" aria-modal="true" aria-label="${esc(title)}"><div class="shead"><h2>${esc(title)}</h2><button class="closef" type="button" data-act="closesheet" aria-label="Close">${ICON.x}</button></div><div></div><div class="spane">${inner}</div></div>`;
+}
+function closeSheet() { const s = $('#sheet'); s.hidden = true; s.innerHTML = ''; }
+let menuTab = 'laws';
+function openMenu(tab, hl) {
+  menuTab = tab || menuTab;
+  const s = $('#sheet'); s.hidden = false;
+  const tabs = [['laws','Verified laws'],['tests','Test cases'],['honest','How it stays honest'],['engine','AI engine']];
+  s.innerHTML = `<div class="card" role="dialog" aria-modal="true" aria-label="More"><div class="shead"><h2>Haqdaar</h2><button class="closef" type="button" data-act="closesheet" aria-label="Close">${ICON.x}</button></div>
+  <div class="tabs" role="tablist">${tabs.map(([k, l]) => `<button role="tab" type="button" data-tab="${k}" aria-selected="${k === menuTab}">${l}</button>`).join('')}</div>
+  <div class="spane" id="spane"></div></div>`;
+  renderTab(hl);
+}
+function renderTab(hl) {
+  const p = $('#spane'); if (!p) return;
+  if (menuTab === 'laws') {
+    p.innerHTML = `<p>These ${LIB.length} entries are the only laws Haqdaar is allowed to cite. Each was written by hand from the official text. Always check the current text on India Code before filing anything.</p>
+    <input class="libsearch" id="libq" type="search" placeholder="Search laws, e.g. deposit, cheque, RTI, 30 days" aria-label="Search laws"><div class="libgrid" id="libgrid"></div>`;
+    const draw = q => {
+      q = (q || '').toLowerCase();
+      $('#libgrid').innerHTML = LIB.filter(l => !q || (l.id + l.cite + l.t + l.p + l.g).toLowerCase().includes(q)).map(l => `<article class="libcard ${l.id === hl ? 'hl' : ''}" id="lib-${l.id}"><span class="grp">${esc(l.g)}</span><span class="id">[[${l.id}]]</span><b>${esc(l.t)}</b><span class="citef">${esc(l.cite)}</span><span>${esc(l.p)}</span><a href="${l.src}" target="_blank" rel="noopener">Check the source</a></article>`).join('') || '<p>No match.</p>';
+    };
+    draw(''); $('#libq').addEventListener('input', e => draw(e.target.value));
+    if (hl) requestAnimationFrame(() => document.getElementById('lib-' + hl)?.scrollIntoView({block:'center'}));
+  } else if (menuTab === 'tests') renderTests();
+  else if (menuTab === 'honest') {
+    p.innerHTML = `<p>AI models confidently invent laws, sections and court cases. Haqdaar is built so that the AI never gets to state the law in its own words.</p>
+    <div class="howgrid">
+      <div class="how"><span class="n">1 · CLOSED BOOK</span><b>A fixed list of verified laws</b>The AI sees ${LIB.length} hand-checked entries and may refer to law only by their IDs, like [[CPA-69]]. It is told never to write section numbers itself.</div>
+      <div class="how"><span class="n">2 · TOKENS, NOT TEXT</span><b>The app writes the citation</b>Every ID is replaced by the exact citation stored in the library. In drafts, “Section 73 of the Indian Contract Act, 1872” comes from the app, not the AI.</div>
+      <div class="how"><span class="n">3 · CHECKED AFTER</span><b>A validator reads every answer</b>It flags any section or article not in the library, anything that looks like a case name (“X v. Y”), law-report citations (AIR, SCC), unknown IDs, and outdated law names like IPC. Problems show in red on the answer.</div>
+      <div class="how"><span class="n">4 · NO JUDGMENTS</span><b>No case law at all</b>Court judgments can’t be verified here, so the AI is told never to cite them and the validator catches any that slip through.</div>
+      <div class="how"><span class="n">5 · DATES BY CODE</span><b>Deadlines are calculated</b>The AI only records the dates you give. Deadlines (2 years, 30 days, 3 working days…) are calculated by the app from the library rules.</div>
+      <div class="how"><span class="n">6 · KNOWS ITS LIMITS</span><b>Lawyer alerts</b>Arrest, court dates, family and property matters, notices threatening a case, large sums, missed deadlines and anything abroad trigger a “talk to a lawyer” alert, both from the AI and from fixed rules on your own words.</div>
+    </div>
+    <p><b>What Haqdaar does not know:</b> state-specific rent laws, the latest state rules under the Labour Codes, court fees, and anything outside its library. It says so instead of guessing.</p>
+    <p><b>Privacy:</b> your conversation and case file are stored only in this browser. Nothing is shared unless you copy or save it.</p>`;
+  } else if (menuTab === 'engine') {
+    p.innerHTML = `<p>Now answering: <b>${esc($('#engineLbl').textContent)}</b>.</p>
+    <p>Haqdaar is hosted with server-side AI. No login or personal API key is required — anyone can use this public prototype immediately.</p>
+    <p>All requests route to the secure <code>/api/chat</code> endpoint. Swapping the underlying model (Gemini, Groq, OpenRouter, OpenAI) is configured through server environment variables without client code changes.</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
+      <button class="btn" type="button" data-act="testai">Test connection</button>
+    </div>
+    <p id="testout" style="margin-top:10px"></p>
+    <p style="margin-top:20px"><button class="btn ghost" type="button" data-act="resetall">Clear my conversation and case file</button></p>`;
+  }
+  $$('.tabs button').forEach(b => b.setAttribute('aria-selected', String(b.dataset.tab === menuTab)));
+}
+
+/* =========================================================
+   TEST CASES — loaded from tests/cases.json
+   ========================================================= */
+let TESTS = [];
+async function ensureTests() {
+  if (TESTS.length) return TESTS;
+  try {
+    const res = await fetch('tests/cases.json');
+    if (res.ok) TESTS = await res.json();
+  } catch {}
+  return TESTS;
+}
+
+let testCtl = null;
+async function runTest(t) {
+  S.tests[t.id] = {status:'run'}; renderTests();
+  await ENG.ready;
+  const started = Date.now(); let raw = '';
+  const engine = ENG.mode;
+  try {
+    if (engine === 'offline' || engine === 'detecting') { raw = offlineAnswer(t.input, emptyCase()); }
+    else { testCtl = new AbortController(); raw = await llm(buildAskSystem(t.lang, emptyCase()), [{role:'user', content:t.input}], {signal:testCtl.signal}); }
+  } catch (e) { S.tests[t.id] = {status:'fail', error:errCopy(e), raw:e.text || '', at:new Date().toISOString(), engine}; LS.set('hq.tests', S.tests); renderTests(); return; }
+  const {reply, obj} = parseAnswer(raw);
+  const c = normalizeCase(obj, emptyCase());
+  const val = validate(reply);
+  const client = clientEscalation([t.input]);
+  const r = {raw, reply, case:c, val, client};
+  const checks = runChecks(t, r);
+  S.tests[t.id] = {status: checks.every(x => x.pass) ? 'pass' : 'fail', raw, case:c, val, client, checks, ms: Date.now() - started, at:new Date().toISOString(), engine};
+  LS.set('hq.tests', S.tests); renderTests();
+}
+let runningAll = false;
+async function runAll() {
+  await ensureTests();
+  runningAll = true; renderTests();
+  for (const t of TESTS) { if (!runningAll) break; await runTest(t); }
+  runningAll = false; renderTests();
+}
+async function renderTests() {
+  const p = $('#spane'); if (!p || menuTab !== 'tests') return;
+  if (!TESTS.length) {
+    p.innerHTML = `<p class="thinking"><span></span><span></span><span></span>&nbsp;Loading test cases…</p>`;
+    await ensureTests();
+    if (menuTab !== 'tests') return;
+  }
+  const done = TESTS.filter(t => S.tests[t.id] && S.tests[t.id].status !== 'run');
+  const passed = done.filter(t => S.tests[t.id].status === 'pass').length;
+  const openIds = new Set([...p.querySelectorAll('details[open]')].map(d => d.dataset.id));
+  p.innerHTML = `<p>${TESTS.length} test cases written for this problem. Each runs through the exact pipeline the chat uses (same prompt, validator and deadline code), starting from an empty case file. The raw model output is kept for every run.</p>
+  <div class="tbar"><button class="btn small" type="button" data-act="runall" ${runningAll ? 'disabled' : ''}>Run all ${TESTS.length}</button>${runningAll ? '<button class="btn small ghost" type="button" data-act="stopall">Stop</button>' : ''}
+  <button class="btn small ghost" type="button" data-act="report" data-f="json">Save raw outputs (.json)</button><button class="btn small ghost" type="button" data-act="report" data-f="md">Save report (.md)</button>
+  <span class="tsum">${done.length}/${TESTS.length} run · ${passed} passed · engine: ${esc(ENG.mode)}</span></div>
+  <div class="tests">${TESTS.map(t => { const r = S.tests[t.id]; const st = r ? r.status : ''; return `<details class="tcase" data-id="${t.id}" ${openIds.has(t.id) ? 'open' : ''}><summary><span class="tid">${t.id}</span><span>${esc(t.title)}</span><span class="tstat ${st}">${st === 'run' ? 'running' : st || 'not run'}</span></summary>
+    <div class="tin"><q>${esc(t.input)}</q>
+    <div class="checks">${(r && r.checks ? r.checks : t.checks.map(([k]) => ({label:k, pass:null}))).map(x => `<span class="pill ${x.pass === true ? 'ok' : x.pass === false ? 'bad' : ''}">${x.pass === true ? ICON.check : x.pass === false ? ICON.warn : ''}${esc(x.label)}</span>`).join('')}</div>
+    <div><button class="btn small ghost" type="button" data-act="runone" data-id="${t.id}" ${st === 'run' ? 'disabled' : ''}>Run this test</button>${r && r.ms ? ` <span class="pill">${(r.ms / 1000).toFixed(1)} s · ${esc(r.engine)}</span>` : ''}</div>
+    ${r && r.error ? `<p class="pill bad">${esc(r.error)}</p>` : ''}
+    ${r && r.raw ? `<div><b>Raw model output</b><div class="raw">${esc(r.raw)}</div></div>` : ''}
+    </div></details>`; }).join('')}</div>`;
+}
+function reportData() {
+  return {app:'Haqdaar', generated:new Date().toISOString(), engine:ENG.mode, library_size:LIB.length,
+    results:TESTS.map(t => ({id:t.id, title:t.title, language:t.lang, input:t.input, expected:t.checks.map(([k, a]) => a === undefined ? k : `${k}: ${JSON.stringify(a)}`), ...(S.tests[t.id] || {status:'not run'})}))};
+}
+function reportMd() {
+  const d = reportData();
+  let s = `# Haqdaar — test report\n\nGenerated ${d.generated} · engine: ${d.engine} · verified library: ${d.library_size} entries\n\n| ID | Test | Result |\n|---|---|---|\n`;
+  s += d.results.map(r => `| ${r.id} | ${r.title} | ${r.status} |`).join('\n') + '\n';
+  for (const r of d.results) {
+    s += `\n## ${r.id} · ${r.title}\n\n**Input (${r.language})**\n\n> ${r.input}\n\n**Checks**\n\n${(r.checks || []).map(c => `- ${c.pass ? 'PASS' : 'FAIL'} — ${c.label}`).join('\n') || '- not run'}\n\n`;
+    if (r.val) s += `**Validator:** ${r.val.verified.length} verified (${r.val.verified.join(', ') || 'none'}), ${r.val.unknown.length} unknown IDs, ${r.val.flags.length} flags${r.val.flags.length ? ': ' + r.val.flags.map(f => `${f.type} "${f.text}"`).join('; ') : ''}\n\n`;
+    if (r.raw) s += '**Raw model output**\n\n```\n' + r.raw + '\n```\n';
+  }
+  return s;
+}
+function saveFile(filename, data) {
+  try {
+    const mime = filename.endsWith('.json') ? 'application/json' : filename.endsWith('.md') ? 'text/markdown' : 'text/plain';
+    const blob = new Blob([data], {type: `${mime};charset=utf-8`});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+    toast('Saved ' + filename);
+    return;
+  } catch (e) {
+    openSheet('Copy this text', `<p>Direct download failed. Select all the text below and copy it.</p><textarea class="copyarea" readonly>${esc(data)}</textarea>`, true);
+  }
+}
+
+/* =========================================================
+   EVENTS
+   ========================================================= */
+function toast(t) { const el = $('#toast'); el.textContent = t; el.hidden = false; clearTimeout(toast.h); toast.h = setTimeout(() => el.hidden = true, 2200); }
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+document.addEventListener('click', async e => {
+  const b = e.target.closest('[data-act], .cite[data-id], [data-tab], .seg button');
+  if (!b) { if (e.target.id === 'folderOverlay') closeFolder(); if (e.target.id === 'sheet') closeSheet(); return; }
+  if (b.matches('.seg button')) { S.mode = b.dataset.mode; renderModeOpts(); setBusy(false); save(); $('#input').focus(); return; }
+  if (b.dataset.tab) { menuTab = b.dataset.tab; renderTab(); return; }
+  if (b.classList.contains('cite') && b.dataset.id) { openMenu('laws', b.dataset.id); return; }
+  const act = b.dataset.act; const i = Number(b.dataset.i);
+  switch (act) {
+    case 'fresh': startFresh(); $('#input').focus(); break;
+    case 'starter': { const inp = $('#input'); inp.value = b.dataset.t; autosize(); inp.focus(); inp.setSelectionRange(inp.value.length, inp.value.length); break; }
+    case 'answer': { closeFolder(); S.mode = 'ask'; renderModeOpts(); const inp = $('#input'); inp.value = ''; inp.placeholder = b.dataset.q; inp.focus(); break; }
+    case 'raw': S.msgs[i].showRaw = !S.msgs[i].showRaw; renderOne(S.msgs[i]); break;
+    case 'flags': S.msgs[i].showFlags = !S.msgs[i].showFlags; renderOne(S.msgs[i]); break;
+    case 'speak': speak(S.msgs[i].text); break;
+    case 'copy': { const el = thread.querySelector(`.docbody[data-i="${i}"]`); const txt = el ? el.innerText : S.msgs[i].doc; try { await navigator.clipboard.writeText(txt); toast('Copied'); } catch { const r = document.createRange(); r.selectNodeContents(el); const s = getSelection(); s.removeAllRanges(); s.addRange(r); toast('Selected — press Ctrl+C to copy'); } break; }
+    case 'savedoc': { const el = thread.querySelector(`.docbody[data-i="${i}"]`); saveFile(`${S.msgs[i].type}-${TODAY()}.txt`, el ? el.innerText : S.msgs[i].doc); break; }
+    case 'ev': { const ev = S.case.evidence[Number(b.dataset.j)]; ev.status = ev.status === 'have' ? 'need' : 'have'; save(); renderCase(); break; }
+    case 'godraft': closeFolder(); S.mode = 'draft'; S.draftType = {deposit:'legal_notice', consumer:'grievance', salary:'wage_demand', cheque:'legal_notice', fraud:'bank', rti:'rti', police:'police', notice:'notice_reply'}[S.case.category] || 'legal_notice'; renderModeOpts(); setBusy(false); $('#input').focus(); break;
+    case 'gopractice': closeFolder(); S.mode = 'practice'; S.oppRole = ''; renderModeOpts(); setBusy(false); break;
+    case 'pstart': startPractice(); break;
+    case 'savecase': saveFile(`case-file-${TODAY()}.md`, caseMd()); break;
+    case 'closefolder': closeFolder(); break;
+    case 'closesheet': runningAll = false; closeSheet(); break;
+    case 'runall': runAll(); break;
+    case 'stopall': runningAll = false; testCtl && testCtl.abort(); renderTests(); break;
+    case 'runone': runTest(TESTS.find(t => t.id === b.dataset.id)); break;
+    case 'report': b.dataset.f === 'json' ? saveFile(`haqdaar-test-raw-outputs-${TODAY()}.json`, JSON.stringify(reportData(), null, 2)) : saveFile(`haqdaar-test-report-${TODAY()}.md`, reportMd()); break;
+    case 'connect': openMenu('engine'); break;
+    case 'testai': await testAI(); break;
+    case 'resetall': closeSheet(); startFresh(); toast('Cleared'); break;
+  }
+});
+
+async function testAI() {
+  const out = $('#testout'); if (!out) return;
+  out.innerHTML = `<span class="thinking"><span></span><span></span><span></span>&nbsp;Testing server connection…</span>`;
+  try {
+    const t = await llm('You are a connection test. Reply with exactly one short sentence in English that starts with "Connected".', [{role:'user', content:'Are you working?'}], {tier:'quick'});
+    const el = $('#testout'); if (!el) return;
+    el.innerHTML = `<span class="pill ok">${ICON.check}Connected</span> Model: <b>${esc(ENG.model || 'live')}</b>. Reply: “${esc((t || '').trim().slice(0, 120))}”.`;
+  } catch (e) {
+    const el = $('#testout'); if (!el) return;
+    el.innerHTML = `<span class="pill bad">${ICON.warn}Offline</span> ${esc(errCopy(e))}`;
+  }
+}
+function caseMd() {
+  const c = S.case; const d = computeDeadlines(c);
+  return `# Case file ${c.no}\n\n**${c.title}** — ${(CATS[c.category] || CATS.other).label}\n\n${c.summary}\n\n- Amount: ${c.amount ? inr(c.amount) : '—'}\n- Other side: ${c.parties.other || '—'} ${c.parties.other_role ? '(' + c.parties.other_role + ')' : ''}\n- Place: ${c.place || '—'}\n\n## What happened\n${c.events.map(e => `- ${e.date ? fmtD(e.date) : e.when}: ${e.what}`).join('\n')}\n\n## Proof\n${c.evidence.map(e => `- [${e.status === 'have' ? 'x' : ' '}] ${e.item}${e.why ? ' — ' + e.why : ''}`).join('\n')}\n\n## Deadlines\n${d.map(x => `- ${x.label}: ${fmtD(x.date)} (${LIBMAP[x.cite].cite})`).join('\n') || '- none yet'}\n\n## Options\n${c.options.map(o => `- ${o.name} — ${o.forum || ''}; cost ${o.cost || '?'}; time ${o.time || '?'}${(o.ids || []).filter(id => LIBMAP[id]).length ? '; law: ' + o.ids.filter(id => LIBMAP[id]).map(id => LIBMAP[id].cite).join('; ') : ''}`).join('\n')}\n\n## Next step\n${c.next_step}\n\n${c.escalate.needed ? '## Lawyer needed\n' + c.escalate.reason + '\nFree legal aid: 15100\n' : ''}\n_Legal information from Haqdaar, not legal advice. Check laws at indiacode.nic.in._\n`;
+}
+document.addEventListener('change', e => {
+  if (e.target.id === 'lang') { S.lang = e.target.value; save(); toast('Replies will be in ' + (LANGS.find(l => l.c === S.lang)?.n || 'your language')); }
+  if (e.target.id === 'draftType') { S.draftType = e.target.value; save(); }
+  if (e.target.id === 'oppRole') { S.oppRole = e.target.value; save(); }
+  if (e.target.id === 'tone') { S.tone = e.target.value; save(); }
+});
+document.addEventListener('input', e => {
+  if (e.target.classList.contains('docbody')) { const m = S.msgs[Number(e.target.dataset.i)]; if (m) { m.doc = e.target.innerText; clearTimeout(save.h); save.h = setTimeout(save, 600); } }
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { if (!$('#sheet').hidden) closeSheet(); else if (!$('#folderOverlay').hidden) closeFolder(); else if (!$('#voice').hidden) closeVoice(); }
+});
+$('#input').addEventListener('input', autosize);
+$('#input').addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { e.preventDefault(); onSend(); } });
+$('#sendBtn').addEventListener('click', onSend);
+$('#micBtn').addEventListener('click', micToggle);
+$('#ttsBtn').addEventListener('click', () => { S.tts = !S.tts; $('#ttsBtn').setAttribute('aria-pressed', String(S.tts)); if (!S.tts) try { speechSynthesis.cancel(); } catch {} save(); toast(S.tts ? 'Replies will be read aloud' : 'Read aloud off'); });
+$('#voiceBtn').addEventListener('click', openVoice);
+$('#caseBtn').addEventListener('click', openFolder);
+$('#menuBtn').addEventListener('click', () => openMenu());
+$('#orb').addEventListener('click', () => { const st = $('#voice').dataset.state; if (st === 'listening') stopDictation(); else if (st !== 'thinking') voiceListen(); });
+$('#vclose').addEventListener('click', closeVoice);
+
+/* ---------- boot ---------- */
+$('#lang').innerHTML = LANGS.map(l => `<option value="${l.c}">${esc(l.n)}</option>`).join('');
+$('#lang').value = S.lang;
+$('#ttsBtn').setAttribute('aria-pressed', String(!!S.tts));
+if ('speechSynthesis' in window) { try { speechSynthesis.getVoices(); speechSynthesis.onvoiceschanged = () => {}; } catch {} }
+renderThread(); renderCase(); renderModeOpts(); setBusy(false);
+ensureTests();
+ENG.ready = initEngine();
+</script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+I cannot name, quote or describe any specific court judgment because I cannot verify them, and a lawyer can help you with proper citations [[RES-NALSA]].
+
+**Where you stand**
+• You are looking for a court citation to demand interest on a delayed security deposit from your landlord.
+• Security deposits and rent matters often depend on the specific state rent laws or the terms in your rental agreement.
+
+**What you can do**
+1. Send a written demand notice [[ICA-73]] to your landlord pointing out the delay in returning your deposit.
+2. Check if your state has adopted the [[MTA-2021]] rules regarding security deposits and refunds.
+3. Consult a local lawyer or reach out [[RES-NALSA]] for free legal advice [[LSA-12]] on how to draft your legal notice correctly.
+
+Which state are you in, and how much is the security deposit amount?
+
+<<<CASE>>>
+{"no":"HQ/2026/7358","category":"deposit","title":"Interest on delayed security deposit","summary":"User is asking for a Supreme Court judgment citation demanding 18 percent interest on a delayed security deposit from a landlord.","place":"","amount":null,"parties":{"you":"","other":"","other_role":"landlord"},"events":[],"evidence":[],"key_dates":{},"options":[{"name":"Send written demand","forum":"Legal Notice / Civil action","cost":"Low","time":"1-2 weeks","ids":["ICA-73"]}],"missing_info":["Which state are you in?","What is the security deposit amount?"],"escalate":{"needed":false,"reason":""},"confidence":"low","next_step":"Draft a written demand notice or consult a lawyer for correct citations."}

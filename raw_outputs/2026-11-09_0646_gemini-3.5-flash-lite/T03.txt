@@ -1,0 +1,15 @@
+Maine samajh liya ki aapne 30 September 2026 ko Noida ki company se resign kiya, aur aapki August aur September ki ₹84,000 salary abhi tak nahi mili hai.
+
+**Where you stand**
+* Aapki company ke paas rules ke mutabiq resignation ke baad bachi hui salary jaldi dene ki zimmedari thi [[COW-17]].
+* Aap [[COW-45]] ke tahat apni mehnat ki kamaai ke liye formal claim daal sakte hain.
+
+**What you can do**
+1. Company ko ek written demand email ya letter bhejiye jisme ₹84,000 jaldi dene ko kahiye [[ICA-73]].
+2. Agar company tab bhi na maane, toh Noida ke labour authority ya designated officer ke paas apni complaint register kariye [[COW-45]].
+3. Agar zaroorat pade aur aapko free legal advice chahiye, toh [[RES-NALSA]] (15100) par call kar sakte hain ya District Legal Services Authority ja sakte hain.
+
+Kya aapke paas resignation ka mail ya letter aur salary slip hai? Aur kis state ya city ki company thi?
+
+<<<CASE>>>
+{"no":"HQ/2026/7123","category":"salary","title":"Unpaid salary after resignation in Noida","summary":"The user resigned on 30 September 2026 after serving notice period in Noida, but the employer has not paid August and September salary totaling ₹84,000.","place":"Noida, Uttar Pradesh","amount":84000,"parties":{"you":"","other":"","other_role":"company / employer"},"events":[{"date":"2026-09-30","when":"30 September 2026","what":"Resigned and served notice period"}],"evidence":[{"item":"Resignation email or letter","status":"have","why":"Proof of employment end"},{"item":"Salary slips for August and September","status":"have","why":"Proof of unpaid amount"}],"key_dates":{"cause_of_action":"2026-09-30","exit_date":"2026-09-30"},"options":[{"name":"Labour Authority Claim","forum":"Labour Authority","cost":"Free","time":"1 to 3 months","ids":["COW-17","COW-45"]}],"missing_info":["Kya aapke paas resignation ka proof aur salary slip hai?","Company ka exact naam ya location kya hai?"],"escalate":{"needed":false,"reason":""},"confidence":"medium","next_step":"Send a written demand to the company and prepare to file a claim before the labour authority"}

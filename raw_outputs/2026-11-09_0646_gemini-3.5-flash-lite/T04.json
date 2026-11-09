@@ -1,0 +1,115 @@
+{
+  "id": "T04",
+  "title": "Cheque bounce · deadline maths",
+  "input": "A friend gave me a cheque of ₹1,50,000 to repay a loan. It bounced and the bank gave me a return memo on 20 October 2026 saying funds insufficient. He is not picking up my calls. What should I do and by when?",
+  "language": "en",
+  "model": "gemini-3.5-flash-lite",
+  "host": "generativelanguage.googleapis.com",
+  "timestamp": "2026-11-09T01:16:57.070Z",
+  "latency_ms": 2535,
+  "raw": "It looks like you received a cheque of ₹1,50,000 from your friend on a loan, but it bounced on 20 October 2026 for insufficient funds and he is ignoring your calls.\n\n**Where you stand**\n* A bounced cheque due to insufficient funds is a serious legal matter [[NI-138]].\n* You must send a written demand notice very soon to protect your right to take legal action [[NI-138]].\n\n**What you can do**\n1. Send a written demand notice to your friend asking for the money within a strict time limit [[NI-138]].\n2. If he does not pay within 15 days of receiving your notice, file a court complaint within one month [[NI-138]], [[NI-142]].\n3. You can file this complaint under [[NI-138]] to seek the money back along with potential penalties.\n\nWould you like me to help draft the written demand notice? Please tell me the exact date on which the bank gave you the return memo, and if you have the original bounced cheque and return memo with you.\n\n<<<CASE>>>\n{\"no\":\"HQ/2026/4009\",\"category\":\"cheque\",\"title\":\"Unpaid loan cheque bounced\",\"summary\":\"A friend gave a cheque of ₹1,50,000 for a loan which bounced due to insufficient funds on 20 October 2026, and he is not responding.\",\"place\":\"\",\"amount\":150000,\"parties\":{\"you\":\"\",\"other\":\"Friend\",\"other_role\":\"borrower\"},\"events\":[{\"date\":\"2026-10-20\",\"when\":\"20 October 2026\",\"what\":\"Cheque bounced for insufficient funds\"}],\"evidence\":[{\"item\":\"Bounced cheque and return memo\",\"status\":\"have\",\"why\":\"Proof of dishonour\"},{\"item\":\"Written demand notice\",\"status\":\"need\",\"why\":\"Required before filing court case\"}],\"key_dates\":{\"dishonour_date\":\"2026-10-20\"},\"options\":[{\"name\":\"Send legal notice and file cheque bounce case\",\"forum\":\"Court\",\"cost\":\"Nominal court fees\",\"time\":\"1 to 3 months\",\"ids\":[\"NI-138\",\"NI-142\"]}],\"missing_info\":[\"What is the exact date on the bank return memo?\",\"Do you have the original cheque and return memo?\"],\"escalate\":{\"needed\":false,\"reason\":\"\"},\"confidence\":\"medium\",\"next_step\":\"Send written demand notice within 30 days of the bank memo\"}",
+  "reply": "It looks like you received a cheque of ₹1,50,000 from your friend on a loan, but it bounced on 20 October 2026 for insufficient funds and he is ignoring your calls.\n\n**Where you stand**\n* A bounced cheque due to insufficient funds is a serious legal matter [[NI-138]].\n* You must send a written demand notice very soon to protect your right to take legal action [[NI-138]].\n\n**What you can do**\n1. Send a written demand notice to your friend asking for the money within a strict time limit [[NI-138]].\n2. If he does not pay within 15 days of receiving your notice, file a court complaint within one month [[NI-138]], [[NI-142]].\n3. You can file this complaint under [[NI-138]] to seek the money back along with potential penalties.\n\nWould you like me to help draft the written demand notice? Please tell me the exact date on which the bank gave you the return memo, and if you have the original bounced cheque and return memo with you.",
+  "case": {
+    "no": "HQ/2026/6773",
+    "category": "cheque",
+    "title": "Unpaid loan cheque bounced",
+    "summary": "A friend gave a cheque of ₹1,50,000 for a loan which bounced due to insufficient funds on 20 October 2026, and he is not responding.",
+    "place": "",
+    "amount": 150000,
+    "parties": {
+      "you": "",
+      "other": "Friend",
+      "other_role": "borrower"
+    },
+    "events": [
+      {
+        "date": "2026-10-20",
+        "when": "20 October 2026",
+        "what": "Cheque bounced for insufficient funds"
+      }
+    ],
+    "evidence": [
+      {
+        "item": "Bounced cheque and return memo",
+        "status": "have",
+        "why": "Proof of dishonour"
+      },
+      {
+        "item": "Written demand notice",
+        "status": "need",
+        "why": "Required before filing court case"
+      }
+    ],
+    "key_dates": {
+      "dishonour_date": "2026-10-20"
+    },
+    "options": [
+      {
+        "name": "Send legal notice and file cheque bounce case",
+        "forum": "Court",
+        "cost": "Nominal court fees",
+        "time": "1 to 3 months",
+        "ids": [
+          "NI-138",
+          "NI-142"
+        ]
+      }
+    ],
+    "missing_info": [
+      "What is the exact date on the bank return memo?",
+      "Do you have the original cheque and return memo?"
+    ],
+    "escalate": {
+      "needed": false,
+      "reason": ""
+    },
+    "confidence": "medium",
+    "next_step": "Send written demand notice within 30 days of the bank memo"
+  },
+  "validation": {
+    "verified": [
+      "NI-138",
+      "NI-142"
+    ],
+    "unknown": [],
+    "flags": [],
+    "clean": true
+  },
+  "lawyer_alert": {
+    "model": false,
+    "reason": "",
+    "rules": [],
+    "needed": false
+  },
+  "deadlines": [
+    {
+      "label": "Send the demand notice by",
+      "date": "2026-11-19",
+      "cite": "NI-138",
+      "note": "30 days from the date you learned the cheque bounced (bank return memo)."
+    }
+  ],
+  "checks": [
+    {
+      "k": "category",
+      "label": "category = cheque (got cheque)",
+      "pass": true
+    },
+    {
+      "k": "citesAny",
+      "label": "cites one of NI-138, NI-142",
+      "pass": true
+    },
+    {
+      "k": "deadline",
+      "label": "Send the demand notice by = 19 Nov 2026 (got 19 Nov 2026)",
+      "pass": true
+    },
+    {
+      "k": "clean",
+      "label": "no unverified law, case names or citations",
+      "pass": true
+    }
+  ],
+  "passed": true
+}

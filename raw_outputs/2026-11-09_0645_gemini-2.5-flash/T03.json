@@ -1,0 +1,14 @@
+{
+  "id": "T03",
+  "title": "Salary + final settlement · Hinglish",
+  "input": "Maine 30 September 2026 ko resign kiya, notice period bhi serve kiya. Company ne August aur September ki salary nahi di, total ₹84,000 baaki hai. HR bolta hai funds aayenge tab denge. Main Noida me kaam karta tha. Kya kar sakta hoon?",
+  "language": "auto",
+  "model": "gemini-2.5-flash",
+  "host": "generativelanguage.googleapis.com",
+  "timestamp": "2026-11-09T01:16:00.619Z",
+  "latency_ms": 700,
+  "error": {
+    "code": "model_not_found",
+    "message": "The AI service says the model \"gemini-2.5-flash\" was not found. Fix LLM_MODEL in the server environment."
+  }
+}

@@ -1,0 +1,15 @@
+It looks like you received a cheque of ₹1,50,000 from your friend on a loan, but it bounced on 20 October 2026 for insufficient funds and he is ignoring your calls.
+
+**Where you stand**
+* A bounced cheque due to insufficient funds is a serious legal matter [[NI-138]].
+* You must send a written demand notice very soon to protect your right to take legal action [[NI-138]].
+
+**What you can do**
+1. Send a written demand notice to your friend asking for the money within a strict time limit [[NI-138]].
+2. If he does not pay within 15 days of receiving your notice, file a court complaint within one month [[NI-138]], [[NI-142]].
+3. You can file this complaint under [[NI-138]] to seek the money back along with potential penalties.
+
+Would you like me to help draft the written demand notice? Please tell me the exact date on which the bank gave you the return memo, and if you have the original bounced cheque and return memo with you.
+
+<<<CASE>>>
+{"no":"HQ/2026/4009","category":"cheque","title":"Unpaid loan cheque bounced","summary":"A friend gave a cheque of ₹1,50,000 for a loan which bounced due to insufficient funds on 20 October 2026, and he is not responding.","place":"","amount":150000,"parties":{"you":"","other":"Friend","other_role":"borrower"},"events":[{"date":"2026-10-20","when":"20 October 2026","what":"Cheque bounced for insufficient funds"}],"evidence":[{"item":"Bounced cheque and return memo","status":"have","why":"Proof of dishonour"},{"item":"Written demand notice","status":"need","why":"Required before filing court case"}],"key_dates":{"dishonour_date":"2026-10-20"},"options":[{"name":"Send legal notice and file cheque bounce case","forum":"Court","cost":"Nominal court fees","time":"1 to 3 months","ids":["NI-138","NI-142"]}],"missing_info":["What is the exact date on the bank return memo?","Do you have the original cheque and return memo?"],"escalate":{"needed":false,"reason":""},"confidence":"medium","next_step":"Send written demand notice within 30 days of the bank memo"}

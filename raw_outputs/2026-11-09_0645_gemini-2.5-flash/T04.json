@@ -1,0 +1,14 @@
+{
+  "id": "T04",
+  "title": "Cheque bounce · deadline maths",
+  "input": "A friend gave me a cheque of ₹1,50,000 to repay a loan. It bounced and the bank gave me a return memo on 20 October 2026 saying funds insufficient. He is not picking up my calls. What should I do and by when?",
+  "language": "en",
+  "model": "gemini-2.5-flash",
+  "host": "generativelanguage.googleapis.com",
+  "timestamp": "2026-11-09T01:16:02.888Z",
+  "latency_ms": 766,
+  "error": {
+    "code": "model_not_found",
+    "message": "The AI service says the model \"gemini-2.5-flash\" was not found. Fix LLM_MODEL in the server environment."
+  }
+}

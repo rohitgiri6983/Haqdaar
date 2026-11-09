@@ -165,4 +165,7 @@ Haqdaar is designed for 1-click serverless deployment on Vercel's free tier with
 4. **Single-Instance Memory Rate Limiting:** The built-in rate limiter in `api/chat.js` uses an in-memory sliding window (20 requests/min per IP), sufficient for serverless instances but scalable with Redis (Upstash) under high traffic.
 
 #   H a q d a a r  
+ #   H a q d a a r  
+ #   a i - l a w y e r  
+ #   a i - l a w y e r  
  
